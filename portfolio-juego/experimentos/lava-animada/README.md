@@ -1,10 +1,28 @@
-# Experimento: lava animada (prueba aislada, no integrada)
+# Experimento: fondos animados (integrado en el juego en la ronda 5)
 
-Prueba de concepto para animar la cascada de lava del fondo de la escena "Inicio"
-(`escenario1.png`). **Nada de esto toca el juego real** — vive aparte en esta carpeta.
+Prueba de concepto para animar los fondos de los 4 niveles. Empezó con la cascada de lava de
+"Inicio" (`escenario1.png`). Esta carpeta **se conserva** como fuente de los recursos y banco de
+pruebas: el juego usa versiones derivadas generadas con `tools/generar-fondos-animados.cjs`.
 
-El `.git` del proyecto está vacío (no es un repositorio funcional), así que no se pudo crear
-una rama de verdad; el aislamiento es por carpeta.
+## Ronda 5: jaula del escenario 2 e integración
+
+- **Jaula-farol**: +13 % (w 90 → 102, proporciones intactas), eje de la cadena en x=192,4 y
+  borde superior del sprite en y=−36. La cadena del PNG es opaca desde la fila 0, así que el
+  borde del sprite queda fuera del escenario y el `overflow: hidden` la recorta justo en el techo:
+  parece que sigue hacia arriba. El pivote sigue en el extremo superior del sprite. El cajón no cambia.
+- **Corrección de posición**: los sprites se posicionaban en % del escenario, lo que solo
+  coincidía con el fondo en proporción 1672:941. Ahora van dentro de un contenedor con el
+  rectángulo real de la imagen (`cover` + `center top`), aquí y en el juego.
+- **Integración** (`src/js/fondos-animados.js`, `src/css/fondos-animados.css`): cada capa se
+  recorta a su caja útil y sus 8 fotogramas se apilan en una hoja vertical animada solo con CSS
+  (`steps(8, jump-none)`, 160 ms por fotograma, como aquí). Recursos: 3,8 MB frente a 7,9 MB, y una
+  fracción de la memoria decodificada (un lienzo completo son ~6,3 MB decodificado). Si el módulo
+  falla, el juego conserva los fondos originales. Prueba: `tests/fondos-animados.cjs`.
+- Si se cambian fotogramas o colgantes aquí, regenerar con `node tools/generar-fondos-animados.cjs`
+  (desde `portfolio-juego/`) y actualizar los parámetros de `COLGANTES` en ese script.
+
+El historial previo de esta carpeta está en git (rama `experimento/animaciones`, tag
+`respaldo-original-pre-animaciones` para el estado anterior a la integración).
 
 ## Cómo verlo
 
