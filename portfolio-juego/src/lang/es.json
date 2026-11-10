@@ -1,0 +1,174 @@
+{
+  "audio": {
+    "mute": "Silenciar sonido",
+    "enable": "Activar sonido",
+    "mixer": "Mezclador de audio",
+    "master": "General",
+    "music": "Música",
+    "effects": "Efectos"
+  },
+  "language": {
+    "label": "Idioma",
+    "spanish": "Español",
+    "english": "English"
+  },
+  "meta": {
+    "title": "Portfolio: Diego Herrera Ayuso"
+  },
+  "header": {
+    "brand": "Portfolio: Diego Herrera Ayuso"
+  },
+  "nav": {
+    "menu": "Menu principal",
+    "home": "Inicio",
+    "experience": "Experiencia",
+    "projects": "Proyectos",
+    "contact": "Contacto"
+  },
+  "levels": {
+    "home": "Inicio",
+    "experience": "Experiencia",
+    "projects": "Proyectos",
+    "contact": "Contacto"
+  },
+  "aria": {
+    "header": "Cabecera del portfolio",
+    "stage": "Escenario principal del portfolio",
+    "mainLevel": "Nivel principal",
+    "infoObject": "Objeto de informacion interactivo",
+    "levelPortal": "Cambio de nivel",
+    "projectObject": "Objeto de proyecto interactivo",
+    "openContactForm": "Abrir formulario de contacto",
+    "openGithub": "Abrir GitHub",
+    "openLinkedin": "Abrir LinkedIn",
+    "downloadCv": "Descargar CV",
+    "contactForm": "Formulario de contacto",
+    "experienceBlock": "Bloque de experiencia",
+    "footer": "Pie de pagina",
+    "closePanel": "Cerrar panel",
+    "characterInfo": "Informacion del personaje",
+    "characterMenuImage": "Menu de informacion del personaje",
+    "profile": "Perfil",
+    "hardSkills": "Hard skills",
+    "softSkills": "Soft skills",
+    "moreSkills": "Mas skills",
+    "languages": "Idiomas",
+    "additionalTraining": "Formacion adicional",
+    "previousTraining": "Ver formacion anterior",
+    "nextTraining": "Ver siguiente formacion",
+    "projectTechnologies": "Tecnologias del proyecto",
+    "pendingProjectLink": "Enlace pendiente del proyecto",
+    "orientationNotice": "Aviso de orientacion",
+    "touchControls": "Controles tactiles",
+    "moveLeft": "Mover a la izquierda",
+    "moveRight": "Mover a la derecha",
+    "climbLadder": "Subir escalera",
+    "jump": "Saltar",
+    "interactI": "Interactuar con I",
+    "interactE": "Interactuar con E",
+    "characterAlt": "Personaje pixel art"
+  },
+  "contact": {
+    "terminal": "Terminal de contacto",
+    "title": "Enviar mensaje",
+    "description": "Escribe un mensaje y se abrira tu correo para enviarlo a Diego.",
+    "name": "Nombre",
+    "email": "Email",
+    "message": "Mensaje",
+    "send": "Enviar",
+    "mailSubject": "Contacto portfolio - {{name}}",
+    "mailSubjectNoName": "Sin nombre",
+    "mailBodyName": "Nombre: {{name}}",
+    "mailBodyEmail": "Email: {{email}}"
+  },
+  "experience": {
+    "eyebrow": "Recorrido profesional",
+    "title": "Experiencia",
+    "adcoreTitle": "Practicas de programador - ",
+    "adcoreDescription": "Desarrollo y mantenimiento de funcionalidades web durante el periodo de practicas.",
+    "technologiesLabel": "Tecnologias:",
+    "adcoreTechnologies": "PHP, JavaScript, HTML, CSS y Bootstrap.",
+    "volunteerTitle": "Voluntariado - ",
+    "volunteerDescription": "Formacion sobre uso de nuevas tecnologias en Avila.",
+    "comingSoon": "Coming soon..."
+  },
+  "footer": {
+    "copyright": "© 2026 Diego Herrera Ayuso. Todos los derechos reservados.",
+    "tech": "Portfolio interactivo en HTML, CSS y JavaScript."
+  },
+  "about": {
+    "title": "Informacion del personaje",
+    "profileTitle": "Perfil",
+    "profileDescription": "Persona comprometida y trabajadora. Aprendo con facilidad y disfruto del trabajo en equipo y el trato con el cliente.",
+    "frontendTitle": "Frontend",
+    "frontendText": "HTML, CSS, JavaScript, jQuery, Tailwind y Bootstrap.",
+    "backendTitle": "Backend",
+    "backendText": "Java, PHP, Oracle, SQL, XML, DTD y XSD.",
+    "toolsTitle": "Tools",
+    "toolsText": "Docker, Git, Figma y organizacion de proyectos.",
+    "softSkillsTitle": "Soft skills 1",
+    "softAnalytical": "Analitico",
+    "softCommunicator": "Comunicador",
+    "softEmpathetic": "Empatico",
+    "moreSkillsTitle": "Soft skills 1.5",
+    "softResolutive": "Resolutivo",
+    "softCreative": "Creativo",
+    "languagesTitle": "Idiomas",
+    "spanishNative": "Español nativo",
+    "englishB1": "Ingles B1",
+    "catalanA2": "Catalan A2",
+    "additionalTrainingTitle": "Formacion adicional"
+  },
+  "training": {
+    "items": [
+      "Google: Inteligencia artificial y productividad.",
+      "OpenWebinars: Excel para principiantes.",
+      "OpenWebinars: Curso de Figma.",
+      "OpenWebinars: Curso de Git.",
+      "OpenWebinars: Python 3.",
+      "OpenWebinars: Bootstrap 5 responsive."
+    ]
+  },
+  "portal": {
+    "title": "Cambio de nivel",
+    "advance": "Vas a avanzar al siguiente nivel.",
+    "reserved": "Este objeto rojo queda reservado para conectar con el siguiente nivel cuando se añada la transicion completa.",
+    "enter": "Entrar"
+  },
+  "project": {
+    "eyebrow": "Proyecto destacado",
+    "title": "Portfolio interactivo",
+    "summary": "Portfolio web gamificado con niveles, personaje jugable, objetos interactivos, paneles de informacion, contacto e internacionalizacion.",
+    "problem": "Problema principal",
+    "problemText": "Crear un portfolio personal que no fuese una pagina estatica tradicional, manteniendo navegacion clara, contenido profesional y una experiencia responsive.",
+    "solution": "Solucion",
+    "solutionText": "Desarrollo en HTML, CSS y JavaScript vanilla con sistema de niveles reutilizable, colisiones, portales, objetos interactivos, formularios e i18next con JSON locales.",
+    "link": "Enlace",
+    "pendingLink": "Repositorio pendiente"
+  },
+  "tutorial": {
+    "title": "Controles",
+    "move": "Moverse",
+    "jump": "Saltar",
+    "climb": "Subir escaleras",
+    "start": "Empezar"
+  },
+  "orientation": {
+    "message": "Gira el movil/tablet en horizontal para visualizarlo correctamente."
+  },
+  "interactions": {
+    "info": "Pulsa I para interactuar",
+    "project": "Portfolio interactivo",
+    "contactMessage": "Pulsa E para escribir un mensaje",
+    "github": "Pulsa E para abrir GitHub",
+    "linkedin": "Pulsa E para abrir LinkedIn",
+    "cv": "Pulsa E para descargar el CV",
+    "goToLevel": "Pulsa I para ir a {{level}}"
+  },
+  "thoughts": {
+    "level1": "Mmm... un espejo.",
+    "level2": "Oh! El portal.",
+    "level3": "Que son esas cosas que flotan?",
+    "level4": "Cuantas antenas..."
+  }
+}

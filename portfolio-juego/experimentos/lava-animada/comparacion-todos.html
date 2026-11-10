@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prueba: fondos animados de los 4 niveles (experimento aislado)</title>
+<link rel="stylesheet" href="../../src/css/estilos.css">
+<link rel="stylesheet" href="../../src/css/escenario.css">
+<style>
+  body { overflow-y: auto; }
+  .barra-prueba {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    padding: 10px 16px; background: #090a12; border-bottom: 4px solid #1f2130;
+    font-family: var(--fuente-pixel); color: #f7f4dc; font-size: 0.8rem;
+  }
+  .barra-prueba button, .barra-prueba select {
+    font: inherit; padding: 6px 12px; cursor: pointer;
+    background: #141421; color: #f7f4dc; border: 2px solid rgba(199,86,255,.68);
+  }
+  .barra-prueba button[aria-pressed="true"] { background: #3a1a40; border-color: #ff6b6b; }
+  .barra-prueba label { display: inline-flex; align-items: center; gap: 5px; opacity: .9; }
+  .barra-prueba .etiqueta { padding: 3px 10px; border-radius: 3px; font-size: 0.7rem; }
+  .etiqueta.original { background: #2a2a2a; }
+  .etiqueta.animado { background: #5a2a1a; color: #ffb37a; }
+  .capa-animada {
+    position: absolute; inset: 0;
+    image-rendering: pixelated;
+    background-repeat: no-repeat; background-size: cover; background-position: center top;
+    transition: opacity 120ms ease;
+    pointer-events: none;
+  }
+  .capa-animada.oculta { opacity: 0; }
+  .nombre-nivel { opacity: .75; flex-basis: 100%; line-height: 1.5; }
+  .capa-sprite {
+    position: absolute;
+    image-rendering: pixelated;
+    /* transform-origin se fija por JS, por objeto, en el punto real de anclaje de la cadena */
+    transition: opacity 120ms ease;
+    pointer-events: none;
+  }
+  .capa-sprite.oculta { opacity: 0; }
+  .capa-sprite.oscila1 { animation: oscilarCadena1 3.2s ease-in-out infinite; }
+  .capa-sprite.oscila2 { animation: oscilarCadena2 2.6s ease-in-out infinite; }
+  @keyframes oscilarCadena1 {
+    0%, 100% { transform: rotate(-7deg); }
+    50% { transform: rotate(7deg); }
+  }
+  @keyframes oscilarCadena2 {
+    0%, 100% { transform: rotate(6deg); }
+    50% { transform: rotate(-5deg); }
+  }
+</style>
+</head>
+<body>
+  <div class="barra-prueba">
+    <strong>Fondos animados — los 4 niveles</strong>
+    <label>Nivel:
+      <select id="selNivel">
+        <option value="1">1 · Inicio</option>
+        <option value="2">2 · Experiencia</option>
+        <option value="3">3 · Proyectos</option>
+        <option value="4">4 · Contacto</option>
+      </select>
+    </label>
+    <button id="btnToggle" type="button" aria-pressed="false">Activar animación</button>
+    <span id="etiquetaEstado" class="etiqueta original">ORIGINAL</span>
+    <span id="opcionesCapas"></span>
+    <span id="nombreCapa" class="nombre-nivel"></span>
+  </div>
+
+  <main id="escenario" class="escenario" data-nivel-actual="1">
+    <div id="capaExtra1" class="capa-animada oculta"></div>
+    <div id="capaExtra2" class="capa-animada oculta"></div>
+    <div id="capaExtra3" class="capa-animada oculta"></div>
+    <img id="capaSprite1" class="capa-sprite oculta" alt="">
+    <img id="capaSprite2" class="capa-sprite oculta" alt="">
+  </main>
+
+<script>
+(function(){
+  const NUM_FRAMES = 8;
+  const MS_POR_FRAME = 160;
+
+  // Cada nivel: lista de capas. tipo "onda" = fotogramas de fondo completo (como las cascadas).
+  // tipo "sprite" = imagen de fondo alternativa + sprite independiente con rotacion CSS.
+  const NIVELES = {
+    1: {
+      descripcion: 'Cascada 1, cascada 2 y suelo de lava con burbujas (ya aprobado).',
+      capas: [
+        { id: 'cascada1', nombre: 'Cascada 1', prefijo: 'cascada1', activaPorDefecto: true },
+        { id: 'cascada2', nombre: 'Cascada 2', prefijo: 'cascada2', activaPorDefecto: true },
+        { id: 'suelo1', nombre: 'Suelo + burbujas', prefijo: 'suelo', activaPorDefecto: true }
+      ]
+    },
+    2: {
+      descripcion: 'Agua de fondo, 6 lámparas parpadeando, y los DOS objetos colgantes (jaula-farol y cajón) oscilando en su cadena, con silueta recortada (ya no un rectángulo opaco) y el hueco parcheado en el fondo.',
+      capas: [
+        { id: 'agua2', nombre: 'Agua de fondo', prefijo: 'agua2', activaPorDefecto: true },
+        { id: 'lamparas2', nombre: 'Lámparas', prefijo: 'lamparas2', activaPorDefecto: true }
+      ],
+      fondoAlternativo: 'recursos/frames/fondo2-parcheado.png',
+      sprites: [
+        {
+          // Primer ajuste (w:179) usaba el ANCHO TOTAL del contenido (caja + cadena larga) como
+          // si fuera el ancho real del objeto -- de ahi que saliera "enorme". Recalculado
+          // comparando contra la jaula real pintada en escenario2.png: la caja (la parte mas
+          // ancha) mide ~60px ahi, no ~120. Escala = 60 / 594 (ancho max. de fila en el PNG
+          // nuevo) = 0.101. Posicion bajada un poco (y) para que no quede "muy arriba".
+          id: 'jaula2', nombre: 'Jaula-farol oscilando',
+          spriteSrc: 'recursos/frames/jaula2-sprite-v2.png',
+          x: 147, y: 95, w: 90, claseOscilar: 'oscila1',
+          origenXPct: 50.4, origenYPct: 0.0,
+          activaPorDefecto: true
+        },
+        {
+          // cajon2-sprite.png tambien reexportado a otra resolucion (836x1881, antes 50x260)
+          id: 'cajon2', nombre: 'Cajón colgante oscilando',
+          spriteSrc: 'recursos/frames/cajon2-sprite.png',
+          x: 487, y: 366, w: 105, claseOscilar: 'oscila2',
+          origenXPct: 50.0, origenYPct: 3.6,
+          activaPorDefecto: true
+        }
+      ]
+    },
+    3: {
+      descripcion: 'Agua de fondo, brillos morados/cálidos en faroles/piedras/velas (8 puntos), y la pantalla del ordenador con un radar que barre y pulsa.',
+      capas: [
+        { id: 'agua3', nombre: 'Agua de fondo', prefijo: 'agua3', activaPorDefecto: true },
+        { id: 'brillos3', nombre: 'Brillos de faroles/piedras', prefijo: 'brillos3', activaPorDefecto: true },
+        { id: 'pantalla3', nombre: 'Pantalla del ordenador', prefijo: 'pantalla3', activaPorDefecto: true }
+      ]
+    },
+    4: {
+      descripcion: 'Agua de fondo (y865-920) y 4 esferitas de señal viajando desde cada icono de contacto (email/github → antena izquierda, linkedin/cv → antena derecha) hasta el nodo inferior de su antena, con una cola corta y desvanecido al salir/llegar.',
+      capas: [
+        { id: 'agua4', nombre: 'Agua de fondo', prefijo: 'agua4', activaPorDefecto: true },
+        { id: 'ondas4', nombre: 'Ondas de antena', prefijo: 'ondas4', activaPorDefecto: true }
+      ]
+    }
+  };
+
+  const escenario = document.getElementById('escenario');
+  const capasExtra = [document.getElementById('capaExtra1'), document.getElementById('capaExtra2'), document.getElementById('capaExtra3')];
+  const capasSprite = [document.getElementById('capaSprite1'), document.getElementById('capaSprite2')];
+  const selNivel = document.getElementById('selNivel');
+  const boton = document.getElementById('btnToggle');
+  const etiqueta = document.getElementById('etiquetaEstado');
+  const nombreCapa = document.getElementById('nombreCapa');
+  const opcionesCapas = document.getElementById('opcionesCapas');
+
+  let indice = 0, activo = false, intervalo = null;
+  let capasActivasNivel = []; // las definiciones de capa (tipo onda) con su checkbox
+
+  function construirUICapas(){
+    opcionesCapas.innerHTML = '';
+    const nivel = NIVELES[selNivel.value];
+    capasActivasNivel = [];
+    for (const capa of nivel.capas){
+      const id = 'chk_' + capa.id;
+      const label = document.createElement('label');
+      const chk = document.createElement('input');
+      chk.type = 'checkbox'; chk.id = id; chk.checked = capa.activaPorDefecto;
+      chk.addEventListener('change', aplicarVisibilidad);
+      label.appendChild(chk);
+      label.append(' ' + capa.nombre);
+      opcionesCapas.appendChild(label);
+      capasActivasNivel.push({ def: capa, chk });
+    }
+    for (const s of (nivel.sprites || [])){
+      const id = 'chk_' + s.id;
+      const label = document.createElement('label');
+      const chk = document.createElement('input');
+      chk.type = 'checkbox'; chk.id = id; chk.checked = s.activaPorDefecto;
+      chk.addEventListener('change', aplicarVisibilidad);
+      label.appendChild(chk);
+      label.append(' ' + s.nombre);
+      opcionesCapas.appendChild(label);
+      capasActivasNivel.push({ def: s, chk, esSprite: true });
+    }
+  }
+
+  function pintarFrame(){
+    const nivel = NIVELES[selNivel.value];
+    capasExtra.forEach((el, i) => {
+      const capa = nivel.capas[i];
+      el.style.backgroundImage = capa ? `url("recursos/frames/${capa.prefijo}-${indice}.png")` : 'none';
+    });
+  }
+
+  function siguienteFrame(){
+    indice = (indice + 1) % NUM_FRAMES;
+    pintarFrame();
+  }
+
+  function aplicarVisibilidad(){
+    const nivel = NIVELES[selNivel.value];
+    capasExtra.forEach((el, i) => {
+      const capa = nivel.capas[i];
+      const entrada = capasActivasNivel.find(c => c.def === capa);
+      const visible = activo && capa && entrada && entrada.chk.checked;
+      el.classList.toggle('oculta', !visible);
+    });
+    const sprites = nivel.sprites || [];
+    let algunSpriteVisible = false;
+    capasSprite.forEach((el, i) => {
+      const s = sprites[i];
+      if (!s) { el.classList.add('oculta'); el.className = 'capa-sprite oculta'; return; }
+      const entrada = capasActivasNivel.find(c => c.def === s);
+      const visible = activo && entrada && entrada.chk.checked;
+      el.className = 'capa-sprite' + (visible ? ` ${s.claseOscilar}` : ' oculta');
+      if (visible) algunSpriteVisible = true;
+    });
+    if (nivel.fondoAlternativo && algunSpriteVisible) {
+      escenario.style.setProperty('background-image', `url("${nivel.fondoAlternativo}")`, 'important');
+    } else {
+      escenario.style.removeProperty('background-image');
+    }
+  }
+
+  function posicionarSprites(){
+    const nivel = NIVELES[selNivel.value];
+    const sprites = nivel.sprites || [];
+    const anchoImg = 1672, altoImg = 941;
+    capasSprite.forEach((el, i) => {
+      const s = sprites[i];
+      if (!s) return;
+      el.src = s.spriteSrc;
+      el.style.left = (s.x / anchoImg * 100) + '%';
+      el.style.top = (s.y / altoImg * 100) + '%';
+      el.style.width = (s.w / anchoImg * 100) + '%';
+      el.style.transformOrigin = `${s.origenXPct}% ${s.origenYPct}%`;
+    });
+  }
+
+  selNivel.addEventListener('change', () => {
+    escenario.dataset.nivelActual = selNivel.value;
+    nombreCapa.textContent = NIVELES[selNivel.value].descripcion;
+    indice = 0;
+    construirUICapas();
+    posicionarSprites();
+    pintarFrame();
+    aplicarVisibilidad();
+  });
+
+  nombreCapa.textContent = NIVELES[selNivel.value].descripcion;
+  construirUICapas();
+  posicionarSprites();
+  pintarFrame();
+
+  boton.addEventListener('click', () => {
+    activo = !activo;
+    boton.setAttribute('aria-pressed', String(activo));
+    boton.textContent = activo ? 'Desactivar animación' : 'Activar animación';
+    etiqueta.textContent = activo ? 'ANIMADO' : 'ORIGINAL';
+    etiqueta.className = 'etiqueta ' + (activo ? 'animado' : 'original');
+    aplicarVisibilidad();
+    if (activo && !intervalo) intervalo = setInterval(siguienteFrame, MS_POR_FRAME);
+    else if (!activo && intervalo) { clearInterval(intervalo); intervalo = null; }
+  });
+})();
+</script>
+</body>
+</html>

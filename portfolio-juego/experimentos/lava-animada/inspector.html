@@ -1,0 +1,18 @@
+<!doctype html><meta charset="utf-8">
+<title>Inspector</title>
+<style>body{margin:0;background:#222}canvas{image-rendering:pixelated;display:block}</style>
+<canvas id="c" width="1672" height="941"></canvas>
+<script>
+const img = new Image();
+img.onload = () => {
+  const c = document.getElementById('c');
+  const ctx = c.getContext('2d');
+  ctx.imageSmoothingEnabled = false;
+  ctx.drawImage(img, 0, 0);
+  window.__ctx = ctx;
+  window.__loaded = true;
+};
+const params = new URLSearchParams(location.search);
+const archivo = params.get('img') || 'escenario1.png';
+img.src = '../../src/assets/imagenes/escenarios/' + archivo;
+</script>

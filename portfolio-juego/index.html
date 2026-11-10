@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio: Diego Herrera Ayuso</title>
+    <link rel="stylesheet" href="src/css/estilos.css">
+    <link rel="stylesheet" href="src/css/escenario.css">
+    <link rel="stylesheet" href="src/css/personaje.css">
+    <link rel="stylesheet" href="src/css/objetos-interactivos.css">
+    <link rel="stylesheet" href="src/css/interfaz.css">
+</head>
+<body>
+    <header class="cabecera-portfolio" aria-label="Cabecera del portfolio" data-i18n-aria-label="aria.header">
+        <div class="marca-portfolio" data-i18n="header.brand">Portfolio:  Diego Herrera Ayuso</div>
+        <div class="acciones-cabecera">
+            <nav class="menu-portfolio" aria-label="Menu principal" data-i18n-aria-label="nav.menu">
+                <a href="#escenario" data-accion-nav="inicio" data-i18n="nav.home">Inicio</a>
+                <a href="#experiencia" data-accion-nav="experiencia" data-i18n="nav.experience">Experiencia</a>
+                <a href="#proyectos" data-accion-nav="proyectos" data-i18n="nav.projects">Proyectos</a>
+                <a href="#contacto" data-accion-nav="contacto" data-i18n="nav.contact">Contacto</a>
+            </nav>
+            <label class="selector-idioma">
+                <span data-i18n="language.label">Idioma</span>
+                <select data-selector-idioma aria-label="Idioma" data-i18n-aria-label="language.label">
+                    <option value="es" data-i18n="language.spanish">Español</option>
+                    <option value="en" data-i18n="language.english">English</option>
+                </select>
+            </label>
+            <button id="boton-sonido" class="boton-sonido" type="button" aria-label="Silenciar sonido" title="Silenciar sonido" aria-pressed="true">
+                <img src="src/assets/iconos/volume-2.svg" data-icono-sonido="on" alt="" width="20" height="20">
+                <img src="src/assets/iconos/volume-x.svg" data-icono-sonido="off" alt="" width="20" height="20" hidden>
+            </button>
+            <div class="mezclador-audio">
+                <button id="boton-mezclador" class="boton-mezclador" type="button" aria-label="Mezclador de audio" title="Mezclador de audio" aria-expanded="false" data-i18n-aria-label="audio.mixer" data-i18n-title="audio.mixer">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                        <line x1="4" y1="21" x2="4" y2="14"></line>
+                        <line x1="4" y1="10" x2="4" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12" y2="3"></line>
+                        <line x1="20" y1="21" x2="20" y2="16"></line>
+                        <line x1="20" y1="12" x2="20" y2="3"></line>
+                        <circle cx="4" cy="12" r="2" fill="currentColor"></circle>
+                        <circle cx="12" cy="10" r="2" fill="currentColor"></circle>
+                        <circle cx="20" cy="14" r="2" fill="currentColor"></circle>
+                    </svg>
+                </button>
+                <div id="panel-mezclador" class="panel-mezclador oculto" role="group" aria-label="Mezclador de audio" data-i18n-aria-label="audio.mixer">
+                    <label class="fila-mezclador">
+                        <span data-i18n="audio.master">General</span>
+                        <input type="range" id="volumen-maestro" min="0" max="100" step="1" value="80">
+                    </label>
+                    <label class="fila-mezclador">
+                        <span data-i18n="audio.music">Música</span>
+                        <input type="range" id="volumen-musica" min="0" max="100" step="1" value="55">
+                    </label>
+                    <label class="fila-mezclador">
+                        <span data-i18n="audio.effects">Efectos</span>
+                        <input type="range" id="volumen-efectos" min="0" max="100" step="1" value="90">
+                    </label>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="escenario" class="escenario" data-nivel-actual="1" aria-label="Escenario principal del portfolio" data-i18n-aria-label="aria.stage">
+        <div class="fondo-cielo" aria-hidden="true"></div>
+        <div class="fondo-ciudad" aria-hidden="true"></div>
+        <div class="plataforma-fondo plataforma-fondo-uno" aria-hidden="true"></div>
+        <div class="plataforma-fondo plataforma-fondo-dos" aria-hidden="true"></div>
+
+        <section id="nivel-principal" class="nivel nivel-activo" aria-label="Nivel principal" data-i18n-aria-label="aria.mainLevel">
+            <div id="ordenador" class="objeto-interactivo ordenador objeto-informacion" aria-label="Objeto de informacion interactivo" data-i18n-aria-label="aria.infoObject">
+                <img class="objeto-informacion-sprite" src="src/assets/imagenes/objetos/informacion/espejo.png" alt="">
+            </div>
+
+            <div id="portal-nivel" class="objeto-interactivo portal-nivel portal-nivel-animable" data-estado-portal="reposo" aria-label="Cambio de nivel" data-i18n-aria-label="aria.levelPortal">
+                <div class="portal-nivel-aura" aria-hidden="true"></div>
+                <img id="portal-nivel-sprite" class="portal-nivel-sprite" src="src/assets/imagenes/objetos/portal-nivel/portal-1.png" alt="">
+            </div>
+
+            <div id="objeto-proyecto-uno" class="objeto-interactivo objeto-proyecto oculto" data-objeto-proyecto="proyecto-uno" aria-label="Objeto de proyecto interactivo" data-i18n-aria-label="aria.projectObject">
+                <img class="objeto-proyecto-sprite" src="src/assets/imagenes/objetos/proyectos/normal.png" alt="">
+            </div>
+
+            <div id="contacto-email" class="objeto-interactivo objeto-contacto oculto" aria-label="Abrir formulario de contacto" data-i18n-aria-label="aria.openContactForm"></div>
+            <div id="contacto-github" class="objeto-interactivo objeto-contacto oculto" aria-label="Abrir GitHub" data-i18n-aria-label="aria.openGithub"></div>
+            <div id="contacto-linkedin" class="objeto-interactivo objeto-contacto oculto" aria-label="Abrir LinkedIn" data-i18n-aria-label="aria.openLinkedin"></div>
+            <div id="contacto-cv" class="objeto-interactivo objeto-contacto oculto" aria-label="Descargar CV" data-i18n-aria-label="aria.downloadCv"></div>
+
+            <section id="formulario-contacto-nivel" class="formulario-contacto-nivel" aria-label="Formulario de contacto" data-i18n-aria-label="aria.contactForm">
+                <span class="etiqueta-contacto-nivel" data-i18n="contact.terminal">Terminal de contacto</span>
+                <h2 data-i18n="contact.title">Enviar mensaje</h2>
+                <p data-i18n="contact.description">Escribe un mensaje y se abrira tu correo para enviarlo a Diego.</p>
+                <form id="formulario-contacto" action="mailto:diegohoyopino@gmail.com" method="post" enctype="text/plain">
+                    <label>
+                        <span data-i18n="contact.name">Nombre</span>
+                        <input name="nombre" autocomplete="name" required>
+                    </label>
+                    <label>
+                        <span data-i18n="contact.email">Email</span>
+                        <input name="email" type="email" autocomplete="email" required>
+                    </label>
+                    <label>
+                        <span data-i18n="contact.message">Mensaje</span>
+                        <textarea name="mensaje" required></textarea>
+                    </label>
+                    <button type="submit" data-i18n="contact.send">Enviar</button>
+                </form>
+            </section>
+
+            <section class="bloque-experiencia-nivel" aria-label="Bloque de experiencia" data-i18n-aria-label="aria.experienceBlock">
+                <div class="bloque-experiencia-cabecera">
+                    <span data-i18n="experience.eyebrow">Recorrido profesional</span>
+                    <strong data-i18n="experience.title">Experiencia</strong>
+                </div>
+                <div class="bloque-experiencia-scroll">
+                    <article class="tarjeta-experiencia">
+                        <span class="tarjeta-experiencia-fecha">26-01-2026 / 20-05-2026</span>
+                        <h2><span data-i18n="experience.adcoreTitle">Practicas de programador - </span><a href="https://www.adcore.es/" target="_blank" rel="noopener noreferrer">Adcore</a></h2>
+                        <p data-i18n="experience.adcoreDescription">Desarrollo y mantenimiento de funcionalidades web durante el periodo de practicas.</p>
+                        <p class="tarjeta-experiencia-tecnologias"><strong data-i18n="experience.technologiesLabel">Tecnologias:</strong> <span data-i18n="experience.adcoreTechnologies">PHP, JavaScript, HTML, CSS y Bootstrap.</span></p>
+                    </article>
+                    <article class="tarjeta-experiencia">
+                        <span class="tarjeta-experiencia-fecha">Veranos 2021 / 2024</span>
+                        <h2><span data-i18n="experience.volunteerTitle">Voluntariado - </span><a href="https://www.cibervoluntarios.org/es/colabora/dona?utm_source=googleads&amp;utm_medium=paid&amp;utm_campaign=programa&amp;utm_term=cibervoluntarios&amp;gad_source=1&amp;gad_campaignid=23878505033&amp;gbraid=0AAAAABpxjngV0xH-Y-1JksgmMJ--TEYVs&amp;gclid=CjwKCAjwu53SBhAhEiwAJzSLNsCB1HGtuPsumxafvbjtS_TVz3eF5NUtZz0vmvQq09QWyX2aGN8qzxoCDFMQAvD_BwE" target="_blank" rel="noopener noreferrer">Asociacion Ciber Voluntarios</a></h2>
+                        <p data-i18n="experience.volunteerDescription">Formacion sobre uso de nuevas tecnologias en Avila.</p>
+                    </article>
+                    <p class="texto-coming-experiencia" data-i18n="experience.comingSoon">Coming soon...</p>
+                </div>
+            </section>
+
+            <div id="contenedor-personaje" class="contenedor-personaje oculto">
+                <img id="personaje" class="personaje" src="src/assets/imagenes/personaje/teletransporte/teleport6.png" alt="Personaje pixel art" data-i18n-alt="aria.characterAlt">
+            </div>
+        </section>
+
+        <div id="suelo" class="suelo" aria-hidden="true"></div>
+        <p id="mensaje-interaccion" class="mensaje-interaccion oculto" data-i18n="interactions.info">Pulsa I para interactuar</p>
+        <p id="pensamiento-jugador" class="pensamiento-jugador oculto" aria-live="polite"></p>
+    </main>
+
+    <footer class="pie-portfolio" aria-label="Pie de pagina" data-i18n-aria-label="aria.footer">
+        <p data-i18n="footer.copyright">© 2026 Diego Herrera Ayuso. Todos los derechos reservados.</p>
+        <p data-i18n="footer.tech">Portfolio interactivo en HTML, CSS y JavaScript.</p>
+    </footer>
+
+    <section id="panel-ordenador" class="panel-flotante oculto" role="dialog" aria-modal="true" aria-labelledby="titulo-panel-ordenador">
+        <div class="panel-contenido panel-contenido-imagen">
+            <button id="boton-cerrar-panel" class="boton-cerrar" type="button" data-cerrar-panel aria-label="Cerrar panel" data-i18n-aria-label="aria.closePanel">×</button>
+            <h1 id="titulo-panel-ordenador" class="titulo-panel-oculto" data-i18n="about.title">Informacion del personaje</h1>
+            <div class="menu-personaje">
+                <img class="imagen-menu-personaje" src="src/assets/imagenes/interfaz/menupersonaje.png" alt="Menu de informacion del personaje" data-i18n-alt="aria.characterMenuImage">
+                <section class="menu-personaje-panel menu-personaje-perfil" aria-label="Perfil" data-i18n-aria-label="aria.profile">
+                    <h2 data-i18n="about.profileTitle">Perfil</h2>
+                    <p data-i18n="about.profileDescription">
+                        Persona comprometida y trabajadora. Aprendo con facilidad y disfruto
+                        del trabajo en equipo y el trato con el cliente.
+                    </p>
+                    <div class="menu-personaje-detalle-skill" data-skill-detalle>
+                        <h3 data-skill-detalle-titulo data-i18n="about.frontendTitle">Frontend</h3>
+                        <p data-skill-detalle-texto data-i18n="about.frontendText">HTML, CSS, JavaScript, jQuery, Tailwind y Bootstrap.</p>
+                    </div>
+                </section>
+                <section class="menu-personaje-hard-icons" aria-label="Hard skills" data-i18n-aria-label="aria.hardSkills">
+                    <button class="boton-hard-skill boton-hard-skill-activo" type="button" data-skill-trigger data-skill-title="Frontend" data-skill-text="HTML, CSS, JavaScript, jQuery, Tailwind y Bootstrap." data-i18n-data-skill-title="about.frontendTitle" data-i18n-data-skill-text="about.frontendText">
+                        <img src="src/assets/imagenes/interfaz/skills/fontend.png" alt="Frontend">
+                    </button>
+                    <button class="boton-hard-skill" type="button" data-skill-trigger data-skill-title="Backend" data-skill-text="Java, PHP, Oracle, SQL, XML, DTD y XSD." data-i18n-data-skill-title="about.backendTitle" data-i18n-data-skill-text="about.backendText">
+                        <img src="src/assets/imagenes/interfaz/skills/backend.png" alt="Backend">
+                    </button>
+                    <button class="boton-hard-skill" type="button" data-skill-trigger data-skill-title="Tools" data-skill-text="Docker, Git, Figma y organizacion de proyectos." data-i18n-data-skill-title="about.toolsTitle" data-i18n-data-skill-text="about.toolsText">
+                        <img src="src/assets/imagenes/interfaz/skills/tools.png" alt="Tools">
+                    </button>
+                </section>
+                <section class="menu-personaje-panel menu-personaje-soft-skills" aria-label="Soft skills" data-i18n-aria-label="aria.softSkills">
+                    <h2 data-i18n="about.softSkillsTitle">Soft skills 1</h2>
+                    <div class="menu-personaje-lista">
+                        <span data-i18n="about.softAnalytical">Analitico</span>
+                        <span data-i18n="about.softCommunicator">Comunicador</span>
+                        <span data-i18n="about.softEmpathetic">Empatico</span>
+                    </div>
+                </section>
+                <section class="menu-personaje-panel menu-personaje-mas-skills" aria-label="Mas skills" data-i18n-aria-label="aria.moreSkills">
+                    <h2 data-i18n="about.moreSkillsTitle">Soft skills 1.5</h2>
+                    <div class="menu-personaje-lista">
+                        <span data-i18n="about.softResolutive">Resolutivo</span>
+                        <span data-i18n="about.softCreative">Creativo</span>
+                    </div>
+                </section>
+                <section class="menu-personaje-panel menu-personaje-idiomas" aria-label="Idiomas" data-i18n-aria-label="aria.languages">
+                    <h2 data-i18n="about.languagesTitle">Idiomas</h2>
+                    <div class="menu-personaje-lista">
+                        <span data-i18n="about.spanishNative">Español nativo</span>
+                        <span data-i18n="about.englishB1">Ingles B1</span>
+                        <span data-i18n="about.catalanA2">Catalan A2</span>
+                    </div>
+                </section>
+                <section class="menu-personaje-panel menu-personaje-formacion" aria-label="Formacion adicional" data-i18n-aria-label="aria.additionalTraining">
+                    <h2 data-i18n="about.additionalTrainingTitle">Formacion adicional</h2>
+                    <button class="boton-formacion" type="button" data-formacion-anterior aria-label="Ver formacion anterior" data-i18n-aria-label="aria.previousTraining">&lt;</button>
+                    <p data-formacion-texto>Google: Inteligencia artificial y productividad.</p>
+                    <button class="boton-formacion" type="button" data-formacion-siguiente aria-label="Ver siguiente formacion" data-i18n-aria-label="aria.nextTraining">&gt;</button>
+                    <span class="contador-formacion" data-formacion-contador>1/1</span>
+                </section>
+            </div>
+        </div>
+    </section>
+
+    <section id="panel-cambio-nivel" class="panel-flotante oculto" role="dialog" aria-modal="true" aria-labelledby="titulo-panel-cambio-nivel">
+        <div class="panel-contenido panel-contenido-alerta">
+            <button class="boton-cerrar" type="button" data-cerrar-panel aria-label="Cerrar panel" data-i18n-aria-label="aria.closePanel">×</button>
+            <h1 id="titulo-panel-cambio-nivel" data-i18n="portal.title">Cambio de nivel</h1>
+            <p class="texto-portal-avance" data-i18n="portal.advance">Vas a avanzar al siguiente nivel.</p>
+            <p data-i18n="portal.reserved">
+                Este objeto rojo queda reservado para conectar con el siguiente nivel cuando se añada
+                la transición completa.
+            </p>
+            <div class="panel-acciones">
+                <button id="boton-cambiar-nivel" class="boton-panel boton-cambio-nivel" type="button" data-i18n="portal.enter">Entrar</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="panel-proyecto-uno" class="panel-flotante oculto" role="dialog" aria-modal="true" aria-labelledby="titulo-panel-proyecto-uno">
+        <div class="panel-contenido panel-contenido-proyecto">
+            <button class="boton-cerrar" type="button" data-cerrar-panel aria-label="Cerrar panel" data-i18n-aria-label="aria.closePanel">X</button>
+            <span class="etiqueta-panel-proyecto" data-i18n="project.eyebrow">Proyecto destacado</span>
+            <h1 id="titulo-panel-proyecto-uno" data-i18n="project.title">Nombre del proyecto</h1>
+            <p class="resumen-panel-proyecto" data-i18n="project.summary">
+                Espacio preparado para explicar el objetivo del proyecto y su valor principal.
+            </p>
+            <div class="ficha-panel-proyecto">
+                <div class="fila-tecnologias-proyecto" aria-label="Tecnologias del proyecto" data-i18n-aria-label="aria.projectTechnologies">
+                    <span>HTML</span>
+                    <span>CSS</span>
+                    <span>JavaScript</span>
+                    <span>i18next</span>
+                </div>
+                <dl class="lista-detalles-proyecto">
+                    <div>
+                        <dt data-i18n="project.problem">Problema principal</dt>
+                        <dd data-i18n="project.problemText">Describe aqui el reto que resolvia el proyecto y por que era importante.</dd>
+                    </div>
+                    <div>
+                        <dt data-i18n="project.solution">Solucion</dt>
+                        <dd data-i18n="project.solutionText">Explica brevemente la decision tecnica o funcional mas importante.</dd>
+                    </div>
+                    <div>
+                        <dt data-i18n="project.link">Enlace</dt>
+                        <dd><a href="#" aria-label="Enlace pendiente del proyecto" data-i18n-aria-label="aria.pendingProjectLink" data-i18n="project.pendingLink">Pendiente de anadir</a></dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+    </section>
+
+    <section id="panel-tutorial-inicio" class="panel-flotante oculto" role="dialog" aria-modal="true" aria-labelledby="titulo-panel-tutorial">
+        <div class="panel-contenido panel-contenido-tutorial">
+            <button class="boton-cerrar" type="button" data-cerrar-panel aria-label="Cerrar panel" data-i18n-aria-label="aria.closePanel">X</button>
+            <h1 id="titulo-panel-tutorial" data-i18n="tutorial.title">Controles</h1>
+            <div class="lista-controles">
+                <div class="control-fila">
+                    <span class="tecla-control">←</span>
+                    <span class="tecla-control">→</span>
+                    <span data-i18n="tutorial.move">Moverse</span>
+                </div>
+                <div class="control-fila">
+                    <span class="tecla-control tecla-control-ancha">Space</span>
+                    <span data-i18n="tutorial.jump">Saltar</span>
+                </div>
+                <div class="control-fila">
+                    <span class="tecla-control">↑</span>
+                    <span data-i18n="tutorial.climb">Subir escaleras</span>
+                </div>
+            </div>
+            <div class="panel-acciones">
+                <button class="boton-panel" type="button" data-cerrar-panel data-i18n="tutorial.start">Empezar</button>
+            </div>
+        </div>
+    </section>
+
+    <aside class="aviso-orientacion" aria-label="Aviso de orientacion" data-i18n-aria-label="aria.orientationNotice">
+        <p data-i18n="orientation.message">Gira el movil/tablet en horizontal para visualizarlo correctamente.</p>
+    </aside>
+
+    <nav class="controles-moviles" aria-label="Controles tactiles" data-i18n-aria-label="aria.touchControls">
+        <button class="boton-control-movil" type="button" data-control-movil="izquierda" aria-label="Mover a la izquierda" data-i18n-aria-label="aria.moveLeft">&lt;</button>
+        <button class="boton-control-movil boton-control-subir" type="button" data-control-movil="arriba" aria-label="Subir escalera" data-i18n-aria-label="aria.climbLadder">↑</button>
+        <button class="boton-control-movil boton-control-salto" type="button" data-control-movil="salto" aria-label="Saltar" data-i18n-aria-label="aria.jump">SPACE</button>
+        <button class="boton-control-movil boton-control-interaccion boton-control-interaccion-i" type="button" data-interaccion-movil="normal" aria-label="Interactuar con I" data-i18n-aria-label="aria.interactI">I</button>
+        <button class="boton-control-movil boton-control-interaccion boton-control-interaccion-e" type="button" data-interaccion-movil="contacto" aria-label="Interactuar con E" data-i18n-aria-label="aria.interactE">E</button>
+        <button class="boton-control-movil" type="button" data-control-movil="derecha" aria-label="Mover a la derecha" data-i18n-aria-label="aria.moveRight">&gt;</button>
+    </nav>
+
+    <script src="https://cdn.jsdelivr.net/npm/i18next@23.16.8/dist/umd/i18next.min.js"></script>
+    <script type="module" src="src/js/principal.js"></script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+.objeto-interactivo {
+    position: absolute;
+    z-index: 5;
+    transition:
+        filter 160ms ease,
+        transform 160ms ease;
+    transform-origin: bottom center;
+    cursor: pointer;
+}
+
+.mostrar-colisiones .objeto-interactivo:not(.oculto)::before {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    content: "";
+    background: rgba(199, 86, 255, 0.12);
+    border: 2px solid rgba(199, 86, 255, 0.98);
+    box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.86) inset,
+        0 0 12px rgba(199, 86, 255, 0.7);
+    pointer-events: none;
+}
+
+.objeto-interactivo-activo {
+    filter:
+        drop-shadow(0 0 5px white)
+        drop-shadow(0 0 12px cyan);
+    transform: scale(1.05);
+}
+
+.ordenador {
+    overflow: visible;
+}
+
+.objeto-informacion-sprite {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
+    pointer-events: none;
+    animation: objeto-informacion-flotar 1700ms ease-in-out infinite;
+    filter:
+        drop-shadow(0 7px 0 rgba(0, 0, 0, 0.28))
+        drop-shadow(0 0 10px rgba(191, 90, 255, 0.34));
+}
+
+.objeto-informacion.objeto-interactivo-activo {
+    filter:
+        drop-shadow(0 0 5px white)
+        drop-shadow(0 0 14px #bf5aff);
+}
+
+.objeto-proyecto {
+    overflow: visible;
+    filter:
+        drop-shadow(0 8px 0 rgba(0, 0, 0, 0.28))
+        drop-shadow(0 0 10px rgba(191, 90, 255, 0.24));
+    animation: objeto-proyecto-flotar 1800ms ease-in-out infinite;
+}
+
+.objeto-proyecto-sprite {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
+    pointer-events: none;
+}
+
+.objeto-proyecto.objeto-interactivo-activo,
+.objeto-proyecto.objeto-proyecto-hover {
+    filter:
+        drop-shadow(0 8px 0 rgba(0, 0, 0, 0.28))
+        drop-shadow(0 0 8px white)
+        drop-shadow(0 0 17px #c756ff);
+}
+
+.objeto-contacto {
+    background: transparent;
+    cursor: pointer;
+}
+
+.objeto-contacto.objeto-interactivo-activo {
+    filter: none;
+    transform: none;
+}
+
+.objeto-contacto::after {
+    position: absolute;
+    inset: 0;
+    display: none;
+    content: "";
+    background: rgba(199, 86, 255, 0.08);
+    border: 3px solid rgba(199, 86, 255, 0.95);
+    box-shadow:
+        0 0 8px rgba(255, 255, 255, 0.72),
+        0 0 18px rgba(199, 86, 255, 0.86),
+        0 0 30px rgba(199, 86, 255, 0.42),
+        0 0 0 2px rgba(0, 0, 0, 0.62) inset;
+    pointer-events: none;
+}
+
+.objeto-contacto.objeto-interactivo-activo::after,
+.objeto-contacto:hover::after,
+.objeto-contacto:focus-visible::after {
+    display: block;
+}
+
+.portal-nivel {
+    --portal-rojo-brillo: #ff3e3e;
+    --portal-rojo-medio: #740b16;
+    --portal-rojo-oscuro: #26040b;
+}
+
+.portal-nivel-animable {
+    overflow: visible;
+}
+
+.portal-nivel-aura {
+    position: absolute;
+    top: -8%;
+    left: 50%;
+    width: 92%;
+    height: 82%;
+    pointer-events: none;
+    background:
+        radial-gradient(circle, rgba(255, 62, 62, 0.36) 0 18%, rgba(255, 62, 62, 0.16) 19% 45%, transparent 72%);
+    transform: translateX(-50%);
+    animation: portal-respirar 1800ms ease-in-out infinite;
+}
+
+.portal-nivel-sprite {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
+    pointer-events: none;
+}
+
+.portal-nivel.objeto-interactivo-activo {
+    filter:
+        drop-shadow(0 0 5px white)
+        drop-shadow(0 0 15px #ff2c2c);
+}
+
+.portal-nivel-abriendo .portal-nivel-aura,
+.portal-nivel[data-estado-portal="abriendo"] .portal-nivel-aura {
+    animation: portal-apertura-aura 700ms ease-out infinite;
+}
+
+.portal-nivel-abriendo .portal-nivel-sprite,
+.portal-nivel[data-estado-portal="abriendo"] .portal-nivel-sprite {
+    animation: portal-apertura-sprite 700ms steps(4) infinite;
+}
+
+@keyframes portal-respirar {
+    0%,
+    100% {
+        opacity: 0.48;
+        transform: translateX(-50%) scale(0.96);
+    }
+
+    50% {
+        opacity: 0.86;
+        transform: translateX(-50%) scale(1.08);
+    }
+}
+
+@keyframes objeto-informacion-flotar {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes objeto-proyecto-flotar {
+    0%,
+    100% {
+        translate: 0 0;
+    }
+
+    50% {
+        translate: 0 -7px;
+    }
+}
+
+@keyframes portal-apertura-aura {
+    from {
+        opacity: 0.45;
+        transform: translateX(-50%) scale(1);
+    }
+
+    to {
+        opacity: 0.95;
+        transform: translateX(-50%) scale(1.38);
+    }
+}
+
+@keyframes portal-apertura-sprite {
+    0% {
+        filter: brightness(1);
+        transform: translateY(0);
+    }
+
+    50% {
+        filter: brightness(1.55);
+        transform: translateY(-2px);
+    }
+
+    100% {
+        filter: brightness(1);
+        transform: translateY(0);
+    }
+}

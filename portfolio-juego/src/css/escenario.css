@@ -1,0 +1,622 @@
+.escenario {
+    position: relative;
+    flex: 1 1 auto;
+    overflow: hidden;
+    height: max(calc(100vh - var(--alto-cabecera) - var(--alto-pie)), var(--alto-escenario));
+    min-height: 0;
+    width: 100%;
+    isolation: isolate;
+    background:
+        url("../assets/imagenes/escenarios/escenario1.png") center top / cover no-repeat,
+        linear-gradient(180deg, var(--color-cielo-arriba) 0%, var(--color-cielo-medio) 48%, var(--color-cielo-abajo) 100%);
+    image-rendering: pixelated;
+}
+
+.escenario[data-nivel-actual="2"] {
+    background:
+        url("../assets/imagenes/escenarios/escenario2.png") center top / cover no-repeat,
+        linear-gradient(180deg, #2b1642 0%, #57224c 48%, #1b1530 100%);
+}
+
+.escenario[data-nivel-actual="3"] {
+    background:
+        url("../assets/imagenes/escenarios/escenario3.png") center top / cover no-repeat,
+        linear-gradient(180deg, #30253e 0%, #4f3858 48%, #1b1828 100%);
+}
+
+.escenario[data-nivel-actual="4"] {
+    background:
+        url("../assets/imagenes/escenarios/escenario4.png") center top / cover no-repeat,
+        linear-gradient(180deg, #100b1f 0%, #241437 48%, #070815 100%);
+}
+
+.fondo-cielo {
+    position: absolute;
+    inset: 0;
+    z-index: -4;
+    background:
+        radial-gradient(circle at 12% 18%, rgba(255, 246, 183, 0.9) 0 28px, transparent 30px),
+        linear-gradient(90deg, transparent 0 12px, rgba(255, 255, 255, 0.12) 12px 16px, transparent 16px 42px);
+    background-size: auto, 84px 100%;
+}
+
+.fondo-cielo,
+.fondo-ciudad,
+.plataforma-fondo {
+    display: none;
+}
+
+.fondo-ciudad {
+    position: absolute;
+    right: 0;
+    bottom: 76px;
+    left: 0;
+    z-index: -3;
+    height: 34vh;
+    min-height: 210px;
+    opacity: 0.7;
+    background:
+        linear-gradient(90deg, transparent 0 4%, #26334b 4% 10%, transparent 10% 15%, #1d2942 15% 28%, transparent 28% 33%, #2d3851 33% 44%, transparent 44% 52%, #212e49 52% 66%, transparent 66% 72%, #33405a 72% 83%, transparent 83% 100%),
+        repeating-linear-gradient(90deg, rgba(255, 214, 112, 0.45) 0 8px, transparent 8px 26px);
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+
+.nivel {
+    position: absolute;
+    inset: 0;
+}
+
+.nivel-activo {
+    display: block;
+}
+
+.bloque-experiencia-nivel {
+    position: absolute;
+    top: 11.4%;
+    right: 10.4%;
+    bottom: 13.8%;
+    left: 51.2%;
+    z-index: 4;
+    display: none;
+    flex-direction: column;
+    min-width: 0;
+    padding: 20px 22px 18px;
+    color: #f7efff;
+    background:
+        linear-gradient(180deg, rgba(9, 8, 19, 0.45), rgba(7, 6, 16, 0.58)),
+        repeating-linear-gradient(0deg, rgba(196, 89, 255, 0.06) 0 1px, transparent 1px 14px);
+    border: 0;
+    box-shadow:
+        0 0 32px rgba(111, 34, 185, 0.14) inset,
+        0 0 22px rgba(184, 68, 255, 0.16);
+    image-rendering: auto;
+}
+
+.escenario[data-nivel-actual="2"] .bloque-experiencia-nivel {
+    display: flex;
+}
+
+.formulario-contacto-nivel {
+    position: absolute;
+    top: 22.5%;
+    right: 10.2%;
+    bottom: 13.5%;
+    left: 55.2%;
+    z-index: 4;
+    display: none;
+    min-width: 0;
+    padding: 18px 20px;
+    color: #f7efff;
+    background:
+        linear-gradient(180deg, rgba(8, 7, 18, 0.4), rgba(7, 6, 16, 0.58)),
+        repeating-linear-gradient(0deg, rgba(199, 86, 255, 0.055) 0 1px, transparent 1px 13px);
+    box-shadow:
+        5px 0 0 rgba(199, 86, 255, 0.55) inset,
+        0 0 26px rgba(199, 86, 255, 0.16) inset,
+        0 0 20px rgba(199, 86, 255, 0.12);
+    image-rendering: auto;
+}
+
+.escenario[data-nivel-actual="4"] .formulario-contacto-nivel {
+    display: block;
+}
+
+.formulario-contacto-nivel.formulario-contacto-destacado {
+    animation: formulario-contacto-pulso 520ms ease-out 2;
+}
+
+.etiqueta-contacto-nivel {
+    display: block;
+    margin-bottom: 8px;
+    color: #ff8b9a;
+    font-size: 0.72rem;
+    text-shadow: 0 0 8px rgba(255, 76, 76, 0.42);
+}
+
+.formulario-contacto-nivel h2 {
+    margin: 0 0 8px;
+    color: #f7eaff;
+    font-size: clamp(1.1rem, 1.7vw, 1.65rem);
+    text-shadow:
+        0 0 7px rgba(199, 86, 255, 0.9),
+        0 0 18px rgba(199, 86, 255, 0.42);
+}
+
+.formulario-contacto-nivel p {
+    margin: 0 0 14px;
+    color: #d8cbe5;
+    font-size: 0.78rem;
+    line-height: 1.42;
+}
+
+.formulario-contacto-nivel form {
+    display: grid;
+    gap: 10px;
+}
+
+.formulario-contacto-nivel label {
+    display: grid;
+    gap: 5px;
+    color: #ffb0bc;
+    font-size: 0.72rem;
+}
+
+.formulario-contacto-nivel input,
+.formulario-contacto-nivel textarea {
+    width: 100%;
+    min-width: 0;
+    padding: 8px 9px;
+    color: #f7efff;
+    background: rgba(7, 6, 16, 0.7);
+    border: 2px solid rgba(199, 86, 255, 0.42);
+    box-shadow:
+        3px 0 0 rgba(255, 107, 107, 0.72) inset,
+        0 0 0 1px rgba(0, 0, 0, 0.58);
+    font: inherit;
+    font-size: 0.78rem;
+}
+
+.formulario-contacto-nivel textarea {
+    min-height: 96px;
+    max-height: 150px;
+    overflow-y: auto;
+    resize: vertical;
+    scrollbar-color: #c756ff rgba(255, 255, 255, 0.08);
+    scrollbar-width: thin;
+}
+
+.formulario-contacto-nivel textarea::-webkit-scrollbar {
+    width: 8px;
+}
+
+.formulario-contacto-nivel textarea::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.formulario-contacto-nivel textarea::-webkit-scrollbar-thumb {
+    background: #c756ff;
+    box-shadow: 0 0 8px rgba(199, 86, 255, 0.7);
+}
+
+.formulario-contacto-nivel input:focus,
+.formulario-contacto-nivel textarea:focus {
+    outline: none;
+    border-color: #ff8b9a;
+    box-shadow:
+        3px 0 0 rgba(255, 107, 107, 0.92) inset,
+        0 0 12px rgba(199, 86, 255, 0.36);
+}
+
+.formulario-contacto-nivel button {
+    justify-self: center;
+    min-width: 118px;
+    padding: 9px 12px;
+    color: #ffe8ff;
+    background:
+        linear-gradient(180deg, rgba(79, 22, 92, 0.96), rgba(32, 9, 48, 0.98)),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0 2px, transparent 2px 6px);
+    border: 3px solid #ff6b9a;
+    box-shadow:
+        0 3px 0 #000000,
+        0 0 0 1px rgba(0, 0, 0, 0.78) inset,
+        0 0 10px rgba(199, 86, 255, 0.36);
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-shadow:
+        0 0 5px rgba(255, 255, 255, 0.76),
+        0 0 12px rgba(255, 64, 121, 0.58);
+    transition:
+        color 140ms ease,
+        border-color 140ms ease,
+        box-shadow 140ms ease,
+        filter 140ms ease,
+        transform 140ms ease;
+}
+
+.formulario-contacto-nivel button:hover,
+.formulario-contacto-nivel button:focus-visible {
+    color: #ffffff;
+    background:
+        linear-gradient(180deg, rgba(120, 28, 120, 0.98), rgba(55, 10, 78, 0.98)),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.14) 0 2px, transparent 2px 6px);
+    border-color: #ff2f6d;
+    outline: none;
+    box-shadow:
+        0 3px 0 #000000,
+        0 0 0 1px rgba(255, 218, 255, 0.52) inset,
+        0 0 8px rgba(255, 255, 255, 0.72),
+        0 0 16px rgba(255, 47, 109, 0.92),
+        0 0 30px rgba(199, 86, 255, 0.64),
+        0 0 48px rgba(255, 47, 109, 0.34);
+    filter: brightness(1.16) saturate(1.22);
+    transform: translateY(-1px);
+    animation: boton-contacto-arcade 860ms steps(2, end) infinite;
+}
+
+@keyframes boton-contacto-arcade {
+    0%,
+    100% {
+        text-shadow:
+            0 0 5px #ffffff,
+            0 0 12px rgba(255, 47, 109, 0.9),
+            0 0 22px rgba(199, 86, 255, 0.58);
+    }
+
+    50% {
+        text-shadow:
+            0 0 3px #ffffff,
+            0 0 9px rgba(199, 86, 255, 0.92),
+            0 0 18px rgba(255, 47, 109, 0.62);
+    }
+}
+
+@keyframes formulario-contacto-pulso {
+    0% {
+        filter: brightness(1);
+    }
+
+    50% {
+        filter: brightness(1.28) drop-shadow(0 0 12px rgba(199, 86, 255, 0.62));
+    }
+
+    100% {
+        filter: brightness(1);
+    }
+}
+
+.bloque-experiencia-cabecera {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 18px;
+    flex: 0 0 auto;
+    padding: 0 2px 12px;
+    margin-bottom: 14px;
+    border-bottom: 2px solid rgba(255, 76, 112, 0.35);
+}
+
+.bloque-experiencia-cabecera span {
+    color: #ff8898;
+    font-size: 0.76rem;
+}
+
+.bloque-experiencia-cabecera strong {
+    color: #f7eaff;
+    font-size: clamp(1.25rem, 2vw, 2rem);
+    text-shadow:
+        0 0 6px rgba(202, 91, 255, 0.9),
+        0 0 16px rgba(151, 62, 255, 0.58);
+}
+
+.bloque-experiencia-scroll {
+    min-height: 0;
+    padding: 2px 10px 4px 0;
+    overflow-y: auto;
+    scrollbar-color: #c756ff rgba(255, 255, 255, 0.08);
+    scrollbar-width: thin;
+}
+
+.bloque-experiencia-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.bloque-experiencia-scroll::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.bloque-experiencia-scroll::-webkit-scrollbar-thumb {
+    background: #c756ff;
+    box-shadow: 0 0 8px rgba(199, 86, 255, 0.7);
+}
+
+.tarjeta-experiencia {
+    position: relative;
+    padding: 15px 18px 15px 22px;
+    margin-bottom: 12px;
+    background:
+        linear-gradient(90deg, rgba(255, 76, 112, 0.13), transparent 28%),
+        rgba(8, 7, 18, 0.7);
+    border: 0;
+    box-shadow:
+        5px 0 0 rgba(255, 76, 112, 0.95) inset,
+        0 3px 0 rgba(0, 0, 0, 0.38),
+        0 0 0 1px rgba(255, 76, 112, 0.28) inset;
+    transition:
+        background 160ms ease,
+        box-shadow 160ms ease,
+        transform 160ms ease;
+}
+
+.tarjeta-experiencia:hover {
+    background:
+        linear-gradient(90deg, rgba(199, 86, 255, 0.18), transparent 34%),
+        rgba(12, 9, 25, 0.84);
+    box-shadow:
+        5px 0 0 rgba(199, 86, 255, 0.95) inset,
+        0 3px 0 rgba(0, 0, 0, 0.42),
+        0 0 16px rgba(199, 86, 255, 0.28),
+        0 0 0 1px rgba(199, 86, 255, 0.38) inset;
+    transform: translateX(4px);
+}
+
+.tarjeta-experiencia h2,
+.tarjeta-experiencia p {
+    margin: 0;
+}
+
+.tarjeta-experiencia h2 {
+    margin-bottom: 8px;
+    color: #ff6d7f;
+    font-size: 1rem;
+    text-shadow: 0 0 8px rgba(255, 76, 112, 0.45);
+}
+
+.tarjeta-experiencia h2 a {
+    color: inherit;
+    text-decoration: none;
+    text-shadow: inherit;
+}
+
+.tarjeta-experiencia h2 a:hover,
+.tarjeta-experiencia h2 a:focus-visible {
+    color: #f0b7ff;
+    outline: none;
+    text-shadow:
+        0 0 7px rgba(199, 86, 255, 0.86),
+        0 0 16px rgba(199, 86, 255, 0.38);
+}
+
+.tarjeta-experiencia p {
+    color: #f0e7f7;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+
+.tarjeta-experiencia-tecnologias {
+    margin-top: 8px !important;
+    color: #f5bfd0 !important;
+}
+
+.tarjeta-experiencia-tecnologias strong {
+    color: #ff6d7f;
+}
+
+.tarjeta-experiencia-fecha {
+    display: inline-block;
+    margin-bottom: 8px;
+    color: #caa7ff;
+    font-size: 0.68rem;
+}
+
+.texto-coming-experiencia {
+    margin: 16px 0 0;
+    color: #dca7ff;
+    font-size: 0.9rem;
+    text-align: center;
+    text-shadow:
+        0 0 7px rgba(199, 86, 255, 0.78),
+        0 0 16px rgba(199, 86, 255, 0.32);
+    animation: coming-experiencia-parpadeo 1800ms ease-in-out infinite;
+}
+
+@keyframes coming-experiencia-parpadeo {
+    0%,
+    100% {
+        opacity: 0.62;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.suelo {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 76px;
+    z-index: 2;
+    background:
+        linear-gradient(180deg, var(--color-suelo-borde) 0 8px, #376040 8px 17px, var(--color-suelo) 17px 100%),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0 14px, transparent 14px 42px);
+    border-top: 4px solid #d3f173;
+    box-shadow: 0 -5px 0 rgba(0, 0, 0, 0.25) inset;
+    display: none;
+}
+
+.capa-colisiones {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.plataforma-colision {
+    position: absolute;
+    display: block;
+    background: transparent;
+    filter:
+        drop-shadow(0 3px 0 rgba(255, 76, 76, 0.48))
+        drop-shadow(0 8px 8px rgba(236, 92, 255, 0.2));
+    image-rendering: pixelated;
+}
+
+.zona-escalera {
+    position: absolute;
+    display: block;
+    pointer-events: none;
+}
+
+.escenario[data-nivel-actual="1"] .plataforma-colision {
+    background:
+        url("../assets/imagenes/escenarios/suelo1-transparente.png") left top / 100% 100% no-repeat;
+}
+
+.escenario[data-nivel-actual="2"] .plataforma-colision,
+.escenario[data-nivel-actual="3"] .plataforma-colision,
+.escenario[data-nivel-actual="4"] .plataforma-colision {
+    background:
+        linear-gradient(180deg, transparent 0 62%, rgba(255, 54, 73, 0.18) 100%);
+    filter: none;
+    box-shadow: 0 4px 8px rgba(255, 54, 73, 0.16);
+}
+
+.plataforma-colision::after {
+    position: absolute;
+    inset: 0;
+    display: none;
+    content: "";
+    background: rgba(0, 255, 255, 0.18);
+    border: 2px solid rgba(0, 255, 255, 0.9);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.85) inset;
+}
+
+.mostrar-colisiones .plataforma-colision::after {
+    display: block;
+}
+
+.zona-escalera::after {
+    position: absolute;
+    inset: 0;
+    display: none;
+    content: "";
+    background:
+        repeating-linear-gradient(
+            180deg,
+            rgba(255, 218, 102, 0.38) 0 8px,
+            transparent 8px 28px
+        ),
+        rgba(255, 218, 102, 0.1);
+    border: 2px solid rgba(255, 218, 102, 0.92);
+    box-shadow: 0 0 12px rgba(255, 218, 102, 0.38);
+}
+
+.mostrar-colisiones .zona-escalera::after {
+    display: block;
+}
+
+.plataforma-fondo {
+    position: absolute;
+    z-index: -2;
+    height: 18px;
+    border: 3px solid rgba(31, 23, 45, 0.75);
+    background: rgba(104, 95, 138, 0.48);
+}
+
+.plataforma-fondo-uno {
+    right: 11%;
+    bottom: 46%;
+    width: min(280px, 32vw);
+}
+
+.plataforma-fondo-dos {
+    left: 8%;
+    bottom: 34%;
+    width: min(220px, 28vw);
+}
+
+@media (max-width: 720px) {
+    .escenario {
+        touch-action: none;
+    }
+
+    .bloque-experiencia-nivel {
+        top: 11%;
+        right: 8.2%;
+        bottom: 14.2%;
+        left: 49.5%;
+        padding: 12px;
+    }
+
+    .bloque-experiencia-cabecera {
+        gap: 10px;
+        padding-bottom: 8px;
+        margin-bottom: 10px;
+    }
+
+    .bloque-experiencia-cabecera span {
+        font-size: 0.58rem;
+    }
+
+    .bloque-experiencia-cabecera strong {
+        font-size: 1rem;
+    }
+
+    .tarjeta-experiencia {
+        padding: 10px 10px 10px 14px;
+        margin-bottom: 9px;
+    }
+
+    .tarjeta-experiencia h2 {
+        font-size: 0.78rem;
+    }
+
+    .tarjeta-experiencia p {
+        font-size: 0.64rem;
+        line-height: 1.35;
+    }
+
+    .texto-coming-experiencia {
+        margin-top: 10px;
+        font-size: 0.7rem;
+    }
+
+    .formulario-contacto-nivel {
+        top: 22%;
+        right: 8%;
+        bottom: 13%;
+        left: 53%;
+        padding: 10px;
+        overflow: auto;
+    }
+
+    .formulario-contacto-nivel h2 {
+        font-size: 0.92rem;
+    }
+
+    .formulario-contacto-nivel p,
+    .formulario-contacto-nivel label,
+    .formulario-contacto-nivel input,
+    .formulario-contacto-nivel textarea,
+    .formulario-contacto-nivel button {
+        font-size: 0.6rem;
+    }
+
+    .formulario-contacto-nivel textarea {
+        min-height: 58px;
+    }
+
+    .fondo-ciudad {
+        height: 28vh;
+        min-height: 160px;
+    }
+
+    .plataforma-fondo-uno,
+    .plataforma-fondo-dos {
+        opacity: 0.45;
+    }
+}

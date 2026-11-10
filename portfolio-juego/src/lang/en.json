@@ -1,0 +1,174 @@
+{
+  "audio": {
+    "mute": "Mute sound",
+    "enable": "Enable sound",
+    "mixer": "Audio mixer",
+    "master": "Master",
+    "music": "Music",
+    "effects": "Effects"
+  },
+  "language": {
+    "label": "Language",
+    "spanish": "Español",
+    "english": "English"
+  },
+  "meta": {
+    "title": "Portfolio: Diego Herrera Ayuso"
+  },
+  "header": {
+    "brand": "Portfolio: Diego Herrera Ayuso"
+  },
+  "nav": {
+    "menu": "Main menu",
+    "home": "Home",
+    "experience": "Experience",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "levels": {
+    "home": "Home",
+    "experience": "Experience",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "aria": {
+    "header": "Portfolio header",
+    "stage": "Main portfolio stage",
+    "mainLevel": "Main level",
+    "infoObject": "Interactive information object",
+    "levelPortal": "Level portal",
+    "projectObject": "Interactive project object",
+    "openContactForm": "Open contact form",
+    "openGithub": "Open GitHub",
+    "openLinkedin": "Open LinkedIn",
+    "downloadCv": "Download CV",
+    "contactForm": "Contact form",
+    "experienceBlock": "Experience block",
+    "footer": "Footer",
+    "closePanel": "Close panel",
+    "characterInfo": "Character information",
+    "characterMenuImage": "Character information menu",
+    "profile": "Profile",
+    "hardSkills": "Hard skills",
+    "softSkills": "Soft skills",
+    "moreSkills": "More skills",
+    "languages": "Languages",
+    "additionalTraining": "Additional training",
+    "previousTraining": "See previous training",
+    "nextTraining": "See next training",
+    "projectTechnologies": "Project technologies",
+    "pendingProjectLink": "Pending project link",
+    "orientationNotice": "Orientation notice",
+    "touchControls": "Touch controls",
+    "moveLeft": "Move left",
+    "moveRight": "Move right",
+    "climbLadder": "Climb ladder",
+    "jump": "Jump",
+    "interactI": "Interact with I",
+    "interactE": "Interact with E",
+    "characterAlt": "Pixel art character"
+  },
+  "contact": {
+    "terminal": "Contact terminal",
+    "title": "Send message",
+    "description": "Write a message and your email client will open so you can send it to Diego.",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send",
+    "mailSubject": "Portfolio contact - {{name}}",
+    "mailSubjectNoName": "No name",
+    "mailBodyName": "Name: {{name}}",
+    "mailBodyEmail": "Email: {{email}}"
+  },
+  "experience": {
+    "eyebrow": "Professional record",
+    "title": "Experience",
+    "adcoreTitle": "Developer internship - ",
+    "adcoreDescription": "Development and maintenance of web features during the internship period.",
+    "technologiesLabel": "Technologies:",
+    "adcoreTechnologies": "PHP, JavaScript, HTML, CSS and Bootstrap.",
+    "volunteerTitle": "Volunteer work - ",
+    "volunteerDescription": "Training on the use of new technologies in Avila.",
+    "comingSoon": "Coming soon..."
+  },
+  "footer": {
+    "copyright": "© 2026 Diego Herrera Ayuso. All rights reserved.",
+    "tech": "Interactive portfolio built with HTML, CSS and JavaScript."
+  },
+  "about": {
+    "title": "Character information",
+    "profileTitle": "Profile",
+    "profileDescription": "Committed and hardworking person. I learn quickly and enjoy teamwork and customer interaction.",
+    "frontendTitle": "Frontend",
+    "frontendText": "HTML, CSS, JavaScript, jQuery, Tailwind and Bootstrap.",
+    "backendTitle": "Backend",
+    "backendText": "Java, PHP, Oracle, SQL, XML, DTD and XSD.",
+    "toolsTitle": "Tools",
+    "toolsText": "Docker, Git, Figma and project organization.",
+    "softSkillsTitle": "Soft skills 1",
+    "softAnalytical": "Analytical",
+    "softCommunicator": "Communicator",
+    "softEmpathetic": "Empathetic",
+    "moreSkillsTitle": "Soft skills 1.5",
+    "softResolutive": "Problem solver",
+    "softCreative": "Creative",
+    "languagesTitle": "Languages",
+    "spanishNative": "Native Spanish",
+    "englishB1": "English B1",
+    "catalanA2": "Catalan A2",
+    "additionalTrainingTitle": "Additional training"
+  },
+  "training": {
+    "items": [
+      "Google: Artificial intelligence and productivity.",
+      "OpenWebinars: Excel for beginners.",
+      "OpenWebinars: Figma course.",
+      "OpenWebinars: Git course.",
+      "OpenWebinars: Python 3.",
+      "OpenWebinars: Responsive Bootstrap 5."
+    ]
+  },
+  "portal": {
+    "title": "Level change",
+    "advance": "You are about to move to the next level.",
+    "reserved": "This red object is reserved to connect with the next level when the full transition is added.",
+    "enter": "Enter"
+  },
+  "project": {
+    "eyebrow": "Featured project",
+    "title": "Interactive portfolio",
+    "summary": "A gamified web portfolio with levels, a playable character, interactive objects, information panels, contact features and internationalization.",
+    "problem": "Main problem",
+    "problemText": "Build a personal portfolio that does not feel like a traditional static page, while keeping clear navigation, professional content and a responsive experience.",
+    "solution": "Solution",
+    "solutionText": "Built with vanilla HTML, CSS and JavaScript, including a reusable level system, collisions, portals, interactive objects, forms and i18next with local JSON files.",
+    "link": "Link",
+    "pendingLink": "Repository pending"
+  },
+  "tutorial": {
+    "title": "Controls",
+    "move": "Move",
+    "jump": "Jump",
+    "climb": "Climb ladders",
+    "start": "Start"
+  },
+  "orientation": {
+    "message": "Rotate your phone/tablet horizontally for the best experience."
+  },
+  "interactions": {
+    "info": "Press I to interact",
+    "project": "Interactive portfolio",
+    "contactMessage": "Press E to write a message",
+    "github": "Press E to open GitHub",
+    "linkedin": "Press E to open LinkedIn",
+    "cv": "Press E to download the CV",
+    "goToLevel": "Press I to go to {{level}}"
+  },
+  "thoughts": {
+    "level1": "Hmm... a mirror.",
+    "level2": "Oh! The portal.",
+    "level3": "What are those floating things?",
+    "level4": "So many antennas..."
+  }
+}
