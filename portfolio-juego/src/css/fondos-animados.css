@@ -1,0 +1,101 @@
+/* Animaciones ambientales de los fondos (integradas desde experimentos/lava-animada).
+   Las capas y colgantes los crea src/js/fondos-animados.js. */
+
+/* Rectangulo real de la imagen de fondo; JS fija left/width/height. Va primero en el DOM del
+   escenario: queda encima del fondo y debajo de plataformas, objetos, paneles y personaje. */
+.fondos-animados {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.fondos-animados-nivel {
+    position: absolute;
+    inset: 0;
+    display: none;
+}
+
+.escenario[data-nivel-actual="1"] .fondos-animados-nivel[data-nivel="1"],
+.escenario[data-nivel-actual="2"] .fondos-animados-nivel[data-nivel="2"],
+.escenario[data-nivel-actual="3"] .fondos-animados-nivel[data-nivel="3"],
+.escenario[data-nivel-actual="4"] .fondos-animados-nivel[data-nivel="4"] {
+    display: block;
+}
+
+/* Hoja vertical de 8 fotogramas (background-size 100% 800% desde JS). Con steps(8, jump-none)
+   background-position recorre 0%, 1/7 ... 100%: fotogramas 0..7, 160ms cada uno, como el
+   experimento. */
+.capa-fondo-animado {
+    position: absolute;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    animation: fondo-animado-fotogramas 1280ms steps(8, jump-none) infinite;
+}
+
+@keyframes fondo-animado-fotogramas {
+    from {
+        background-position: 0 0%;
+    }
+
+    to {
+        background-position: 0 100%;
+    }
+}
+
+/* Objetos colgantes del nivel 2 (jaula-farol y cajon). El pivote (transform-origin) lo fija JS
+   en el punto de anclaje de cada cadena. La jaula sobresale por encima del escenario: su cadena
+   la recorta el borde superior (overflow: hidden del escenario) y parece seguir hacia el techo. */
+.colgante-fondo-animado {
+    position: absolute;
+    display: block;
+    max-width: none;
+    user-select: none;
+}
+
+.oscilar-colgante-1 {
+    animation: oscilar-colgante-1 3.2s ease-in-out infinite;
+}
+
+.oscilar-colgante-2 {
+    animation: oscilar-colgante-2 2.6s ease-in-out infinite;
+}
+
+@keyframes oscilar-colgante-1 {
+    0%,
+    100% {
+        transform: rotate(-7deg);
+    }
+
+    50% {
+        transform: rotate(7deg);
+    }
+}
+
+@keyframes oscilar-colgante-2 {
+    0%,
+    100% {
+        transform: rotate(6deg);
+    }
+
+    50% {
+        transform: rotate(-5deg);
+    }
+}
+
+/* Fondo del nivel 2 sin la jaula ni el cajon pintados (ahora son sprites animados). Solo se
+   aplica si el modulo JS se ha iniciado. */
+.escenario.fondos-animados-activos[data-nivel-actual="2"] {
+    background:
+        url("../assets/imagenes/escenarios/escenario2-sin-colgantes.png") center top / cover no-repeat,
+        linear-gradient(180deg, #2b1642 0%, #57224c 48%, #1b1530 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    /* Se quedan quietos: primer fotograma y colgantes en vertical. */
+    .capa-fondo-animado,
+    .colgante-fondo-animado {
+        animation: none;
+    }
+}

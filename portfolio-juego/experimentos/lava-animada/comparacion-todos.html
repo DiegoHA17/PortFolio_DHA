@@ -40,6 +40,7 @@
     pointer-events: none;
   }
   .capa-sprite.oculta { opacity: 0; }
+  .capa-imagen { position: absolute; top: 0; left: 0; pointer-events: none; }
   .capa-sprite.oscila1 { animation: oscilarCadena1 3.2s ease-in-out infinite; }
   .capa-sprite.oscila2 { animation: oscilarCadena2 2.6s ease-in-out infinite; }
   @keyframes oscilarCadena1 {
@@ -73,8 +74,12 @@
     <div id="capaExtra1" class="capa-animada oculta"></div>
     <div id="capaExtra2" class="capa-animada oculta"></div>
     <div id="capaExtra3" class="capa-animada oculta"></div>
-    <img id="capaSprite1" class="capa-sprite oculta" alt="">
-    <img id="capaSprite2" class="capa-sprite oculta" alt="">
+    <!-- Contenedor con el rectangulo REAL de la imagen de fondo (cover + center top), para que
+         los sprites se posicionen en coordenadas de imagen en cualquier proporcion de ventana. -->
+    <div id="capaImagen" class="capa-imagen">
+      <img id="capaSprite1" class="capa-sprite oculta" alt="">
+      <img id="capaSprite2" class="capa-sprite oculta" alt="">
+    </div>
   </main>
 
 <script>
@@ -107,9 +112,16 @@
           // comparando contra la jaula real pintada en escenario2.png: la caja (la parte mas
           // ancha) mide ~60px ahi, no ~120. Escala = 60 / 594 (ancho max. de fila en el PNG
           // nuevo) = 0.101. Posicion bajada un poco (y) para que no quede "muy arriba".
+          //
+          // Ronda 5: +13% (w 90 -> 102, proporcion intacta) y subida hasta el techo. La cadena del
+          // PNG es opaca desde la fila 0 (corte duro), asi que el borde superior del sprite queda
+          // POR ENCIMA del escenario (y negativo): el overflow:hidden del escenario recorta la
+          // cadena justo en el borde y se lee como si siguiera hacia arriba. x recalculado para
+          // que el eje de la cadena (50.4% del ancho) siga en x=192.4 del fondo. El pivote sigue
+          // en el extremo superior del sprite (origenYPct 0), ahora 36px por encima del borde.
           id: 'jaula2', nombre: 'Jaula-farol oscilando',
           spriteSrc: 'recursos/frames/jaula2-sprite-v2.png',
-          x: 147, y: 95, w: 90, claseOscilar: 'oscila1',
+          x: 141, y: -36, w: 102, claseOscilar: 'oscila1',
           origenXPct: 50.4, origenYPct: 0.0,
           activaPorDefecto: true
         },
@@ -217,6 +229,19 @@
       escenario.style.removeProperty('background-image');
     }
   }
+
+  const capaImagen = document.getElementById('capaImagen');
+  function ajustarCapaImagen(){
+    // Misma formula que Juego.calcularRectanguloImagenFondo(): cover + center top.
+    const W = escenario.clientWidth, H = escenario.clientHeight;
+    const escala = Math.max(W / 1672, H / 941);
+    const w = 1672 * escala, h = 941 * escala;
+    capaImagen.style.left = ((W - w) / 2) + 'px';
+    capaImagen.style.width = w + 'px';
+    capaImagen.style.height = h + 'px';
+  }
+  new ResizeObserver(ajustarCapaImagen).observe(escenario);
+  ajustarCapaImagen();
 
   function posicionarSprites(){
     const nivel = NIVELES[selNivel.value];

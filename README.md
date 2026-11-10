@@ -52,6 +52,19 @@ En movil y tablet hay botones tactiles para movimiento, salto e interacciones co
 - Pantalla de contacto con formulario y enlaces.
 - Internacionalizacion con i18next y archivos JSON locales.
 - Persistencia de idioma con `localStorage`.
+- Fondos animados en los 4 niveles (lava, agua, lamparas, brillos, senales y objetos colgantes),
+  solo con CSS y respetando `prefers-reduced-motion`. Los recursos se generan desde
+  `portfolio-juego/experimentos/lava-animada` con `node tools/generar-fondos-animados.cjs`.
+
+## Pruebas
+
+Con el servidor local en marcha (requieren Playwright):
+
+```bash
+cd portfolio-juego
+node tests/audio.cjs
+node tests/fondos-animados.cjs
+```
 
 ## Idiomas
 
