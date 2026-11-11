@@ -1,105 +1,114 @@
 # Portfolio interactivo 2D
 
-Portfolio web gamificado con estetica pixel art, personaje jugable, niveles, objetos interactivos, paneles de informacion, formulario de contacto e internacionalizacion.
+Un portfolio web con estética pixel art que presenta información personal, habilidades, formación, experiencia y proyectos mediante un personaje jugable, escenarios y objetos interactivos.
 
-El proyecto esta hecho con HTML, CSS y JavaScript vanilla. No usa framework, bundler ni backend.
+La navegación combina movimiento por niveles con paneles de información y una pantalla de contacto. El entorno incorpora portales, fondos animados y efectos de sonido.
 
-## Ejecutar en local
+## Características
 
-Desde la carpeta del proyecto:
+### Un portfolio para explorar
 
-```bash
-cd portfolio-juego
-python -m http.server 5500 --bind 127.0.0.1
-```
+- **Personaje jugable** con movimiento lateral, salto y animaciones.
+- **Sistema de niveles reutilizable** con portales para desplazarse entre escenarios.
+- **Colisiones y escaleras** que forman parte del recorrido.
+- **Objetos interactivos** mediante proximidad y clic.
 
-Despues abre:
+### Contenido del portfolio
 
-```text
-http://127.0.0.1:5500/
-```
+- **Sobre mí** con habilidades y formación.
+- **Experiencia** en un bloque con desplazamiento.
+- **Proyectos** presentados en un panel propio.
+- **Contacto** con formulario y enlaces.
 
-No es recomendable abrir `index.html` con doble clic porque los modulos ES pueden fallar con `file://`.
+### Ambientación e interfaz
+
+- **Fondos animados en cuatro niveles**, con lava, agua, lámparas, brillos, señales y objetos colgantes.
+- **Animaciones de fondo mediante CSS** que respetan la preferencia `prefers-reduced-motion`.
+- **Control de sonido** desde el icono de altavoz de la cabecera, con persistencia local de la preferencia.
+- **Interfaz en español e inglés**, con español como idioma predeterminado. La selección se conserva mediante `localStorage` y el cambio recarga la página para actualizar los textos.
+- **Botones táctiles en móvil y tablet** para movimiento, salto e interacciones contextuales.
 
 ## Controles
 
-El icono de altavoz en la cabecera activa o silencia los efectos arcade y guarda
-la preferencia localmente. No hay musica automatica: el audio se desbloquea con
-la primera interaccion. Los cinco efectos son locales, de Kenney (CC0); fuentes
-y licencia en `portfolio-juego/src/assets/audio/CREDITOS.md`. El volumen de cada
-accion se puede ajustar en `portfolio-juego/src/js/sonidos.js`.
+### Teclado
 
-- Flechas izquierda/derecha: moverse.
-- Space: saltar.
-- Flecha arriba: subir por escaleras cuando corresponde.
-- I: interactuar con objetos de informacion, proyectos o portales.
-- E: interactuar con objetos de contacto.
-- Escape: cerrar paneles.
-- O: mostrar/ocultar bordes de colision para debug.
-- Q/W: aparecer/desaparecer temporalmente durante desarrollo.
+| Tecla | Acción |
+| --- | --- |
+| ← / → | Mover al personaje |
+| Espacio | Saltar |
+| ↑ | Subir por escaleras cuando corresponde |
+| I | Interactuar con información, proyectos o portales |
+| E | Interactuar con objetos de contacto |
+| Escape | Cerrar paneles |
 
-En movil y tablet hay botones tactiles para movimiento, salto e interacciones contextuales.
+### Interfaz y controles táctiles
 
-## Caracteristicas
+- El icono de altavoz activa o silencia el sonido.
+- El selector de idioma de la cabecera permite cambiar entre español e inglés.
+- Los botones táctiles ofrecen movimiento, salto y acciones contextuales.
+- Los objetos interactivos también admiten clic.
 
-- Sistema de niveles reutilizable.
-- Portal entre niveles.
-- Colisiones y escaleras.
-- Objetos interactivos por proximidad y click.
-- Panel "Sobre mi" con skills y formacion.
-- Bloque de experiencia scrollable.
-- Panel de proyectos.
-- Pantalla de contacto con formulario y enlaces.
-- Internacionalizacion con i18next y archivos JSON locales.
-- Persistencia de idioma con `localStorage`.
-- Fondos animados en los 4 niveles (lava, agua, lamparas, brillos, senales y objetos colgantes),
-  solo con CSS y respetando `prefers-reduced-motion`. Los recursos se generan desde
-  `portfolio-juego/experimentos/lava-animada` con `node tools/generar-fondos-animados.cjs`.
+### Atajos de desarrollo
 
-## Pruebas
+| Tecla | Acción |
+| --- | --- |
+| O | Mostrar u ocultar los bordes de colisión |
+| Q / W | Aparición y desaparición temporal del personaje durante el desarrollo |
 
-Con el servidor local en marcha (requieren Playwright):
+## Tecnologías
 
-```bash
-cd portfolio-juego
-node tests/audio.cjs
-node tests/fondos-animados.cjs
-```
+El proyecto está desarrollado con **HTML, CSS y JavaScript vanilla**, organizado mediante módulos ES. La internacionalización utiliza **i18next** y archivos JSON locales.
 
-## Idiomas
+El código separa las entidades del juego, los controles, las animaciones, el sonido, la interfaz y los textos traducidos.
 
-Los textos estan en:
-
-```text
-portfolio-juego/src/lang/es.json
-portfolio-juego/src/lang/en.json
-```
-
-El idioma por defecto es espanol. Al cambiar idioma desde la cabecera, se guarda la seleccion y se recarga la pagina para reiniciar el portfolio con todos los textos actualizados.
-
-## Estructura
+## Estructura del proyecto
 
 ```text
 portfolio-juego/
 ├── index.html
-└── src/
-    ├── assets/
-    ├── css/
-    ├── entities/
-    ├── js/
-    └── lang/
+├── src/
+│   ├── assets/
+│   │   ├── audio/
+│   │   ├── documentos/
+│   │   ├── fuentes/
+│   │   ├── iconos/
+│   │   ├── imagenes/
+│   │   └── sonidos/
+│   ├── css/
+│   ├── entities/
+│   │   ├── Entidad.js
+│   │   ├── Jugador.js
+│   │   ├── Nivel.js
+│   │   ├── ObjetoInteractivo.js
+│   │   └── PlataformaColision.js
+│   ├── js/
+│   │   ├── animaciones.js
+│   │   ├── configuracion.js
+│   │   ├── controles.js
+│   │   ├── fondos-animados-datos.js
+│   │   ├── fondos-animados.js
+│   │   ├── i18n.js
+│   │   ├── juego.js
+│   │   ├── principal.js
+│   │   └── sonidos.js
+│   └── lang/
+│       ├── es.json
+│       └── en.json
+├── experimentos/
+│   └── lava-animada/
+├── tests/
+│   ├── audio.cjs
+│   └── fondos-animados.cjs
+└── tools/
+    ├── generar-fondos-animados.cjs
+    └── preparar-audio.cjs
 ```
 
-## Preparado para Git
-
-El repositorio ignora archivos internos de Codex, dependencias, builds, logs y temporales mediante `.gitignore`.
-
-Para subirlo a GitHub:
-
-```bash
-git add .
-git commit -m "Initial interactive portfolio"
-git branch -M main
-git remote add origin <URL_DEL_REPOSITORIO>
-git push -u origin main
-```
+- **`src/assets/`** reúne imágenes de escenarios, personaje, objetos e interfaz, además de audio, iconos y documentos.
+- **`src/css/`** organiza los estilos del escenario, el personaje, la interfaz, los objetos interactivos y los fondos animados.
+- **`src/entities/`** contiene las entidades del juego, incluidos el jugador, los niveles, los objetos interactivos y las plataformas de colisión.
+- **`src/js/`** agrupa la lógica del juego y los módulos de controles, animación, sonido e idioma.
+- **`src/lang/`** contiene los textos en español e inglés.
+- **`experimentos/lava-animada/`** reúne una comparación visual, fotogramas y scripts relacionados con los recursos animados.
+- **`tests/`** contiene archivos de pruebas de audio y fondos animados.
+- **`tools/`** contiene herramientas para generar fondos animados y preparar audio.
