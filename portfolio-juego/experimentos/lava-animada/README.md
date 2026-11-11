@@ -24,16 +24,23 @@ pruebas: el juego usa versiones derivadas generadas con `tools/generar-fondos-an
 El historial previo de esta carpeta está en git (rama `experimento/animaciones`, tag
 `respaldo-original-pre-animaciones` para el estado anterior a la integración).
 
+**Limpieza tras la integración**: se borraron `comparacion.html` (visor solo del nivel 1, cubierto
+por `comparacion-todos.html`), `inspector.html`, `scripts/guardar-servidor.cjs`,
+`scripts/generar-ondas-antena.cjs` (sustituido; regeneraba la versión descartada de `ondas4-*`) y
+`scripts/extraer-colgantes.cjs` (sobrescribía `fondo2-parcheado.png`, corregido a mano). Las
+secciones de abajo los mencionan como historia. Para recuperarlos:
+`git checkout respaldo-original-pre-animaciones -- portfolio-juego/experimentos/lava-animada/<archivo>`.
+
 ## Cómo verlo
 
 Con el servidor local ya corriendo en `127.0.0.1:5500` (el mismo que sirve el juego):
 
 ```
-http://127.0.0.1:5500/experimentos/lava-animada/comparacion.html
+http://127.0.0.1:5500/experimentos/lava-animada/comparacion-todos.html
 ```
 
-Botón "Activar animación" alterna entre el escenario original y el animado sin recargar.
-"Simular cámara" prueba que la capa sigue el scroll igual que el fondo real.
+Selector de nivel, botón "Activar animación" (alterna original/animado sin recargar) y una casilla
+por capa.
 
 ## Técnica
 
@@ -70,12 +77,8 @@ Botón "Activar animación" alterna entre el escenario original y el animado sin
   desaparecen) en posiciones fijas (semilla determinista) dentro de la máscara de lava.
 - Las 24 imágenes son fotogramas completos (1672×941, mayormente transparentes) — **3.3MB en
   total**, bastante más que la v1 de una sola cascada (440KB); ver nota de peso en la evaluación.
-- `inspector.html` — herramienta usada para localizar la lava por color (reutilizable para
-  otras zonas si se aprueba extender esto).
-- `comparacion.html` — vista de prueba con el interruptor.
-- `scripts/guardar-servidor.cjs` — servidor temporal (puerto 5501) usado solo para sacar los
-  PNG generados en el navegador a disco. No se necesita para ver el resultado, solo se usó
-  durante la generación.
+- (Borrados en la limpieza: `inspector.html`, `comparacion.html` y `scripts/guardar-servidor.cjs`,
+  herramientas de esta primera ronda.)
 
 ## Ronda 4: señal viajando de los iconos de contacto a las antenas
 
