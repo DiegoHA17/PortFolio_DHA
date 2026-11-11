@@ -1,20 +1,55 @@
-.agents/
+# ── Asistentes de IA / agentes (en cualquier carpeta) ──
+.claude/
 .codex/
+.agents/
+.agent/
+.cursor/
+.cursorrules
+.aider*
+.continue/
+.windsurf/
+.gemini/
+.superpowers/
+.playwright-mcp/
+.mcp.json
+CLAUDE.md
+CLAUDE.local.md
+AGENTS.md
+GEMINI.md
+codex-*.md
+*.local.json
 
+# ── Dependencias y builds ──
 node_modules/
 dist/
 build/
+.cache/
+coverage/
 
+# ── Entorno y secretos ──
 .env
 .env.*
-*.log
+*.pem
+*.key
 
+# ── Logs y temporales ──
+*.log
+npm-debug.log*
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+
+# ── Sistema operativo ──
 .DS_Store
 Thumbs.db
 desktop.ini
+ehthumbs.db
+$RECYCLE.BIN/
 
+# ── Editores ──
 .vscode/
 !.vscode/extensions.json
-
-*.tmp
-*.temp
+.idea/
+*.code-workspace
