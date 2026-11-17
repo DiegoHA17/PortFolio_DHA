@@ -66,7 +66,10 @@
     "jump": "Saltar",
     "interactI": "Interactuar con I",
     "interactE": "Interactuar con E",
-    "characterAlt": "Personaje pixel art"
+    "characterAlt": "Personaje pixel art",
+    "projectObjectLunar": "Proyecto Lunar Finance",
+    "projectObjectPsicoD": "Proyecto Psico D",
+    "projectGallery": "Capturas del proyecto"
   },
   "contact": {
     "terminal": "Terminal de contacto",
@@ -144,7 +147,10 @@
     "solution": "Solucion",
     "solutionText": "Desarrollo en HTML, CSS y JavaScript vanilla con sistema de niveles reutilizable, colisiones, portales, objetos interactivos, formularios e i18next con JSON locales.",
     "link": "Enlace",
-    "pendingLink": "Repositorio pendiente"
+    "pendingLink": "Repositorio pendiente",
+    "features": "Funcionalidades",
+    "platforms": "Plataformas",
+    "evolution": "Evolución"
   },
   "tutorial": {
     "title": "Controles",
@@ -163,12 +169,57 @@
     "github": "Pulsa E para abrir GitHub",
     "linkedin": "Pulsa E para abrir LinkedIn",
     "cv": "Pulsa E para descargar el CV",
-    "goToLevel": "Pulsa I para ir a {{level}}"
+    "goToLevel": "Pulsa I para ir a {{level}}",
+    "projectLunar": "Lunar Finance",
+    "projectPsicoD": "Psico D · PsicoHito"
   },
   "thoughts": {
     "level1": "Mmm... un espejo.",
     "level2": "Oh! El portal.",
     "level3": "Que son esas cosas que flotan?",
     "level4": "Cuantas antenas..."
+  },
+  "projectLunar": {
+    "eyebrow": "Aplicación de escritorio",
+    "summary": "Aplicación de escritorio para gestionar las finanzas personales: convierte una base de datos de gastos de Notion en un panel con ingresos, gastos, categorías, informes y pagos periódicos.",
+    "problemText": "Apuntar gastos en Notion es cómodo, también desde el móvil, pero saber cuánto se ha gastado y en qué obliga a montar vistas, filtros y fórmulas para cada pregunta. Y un informe presentable no sale solo.",
+    "solutionText": "Una aplicación ligera con Tauri 2: Rust se encarga de la API de Notion, del token (en el almacén seguro del sistema) y de la conexión con la IA local; TypeScript y React, de la interfaz, los cálculos y los informes. Sin servidor propio ni analíticas.",
+    "featuresText": "Ingresos, gastos y balance por periodos · categorías con reglas de clasificación automática · pagos periódicos sin duplicados · informes PDF en estilo Clásico o Vintage y exportación a CSV · atajos de iPhone para apuntar gastos desde el móvil · IA local opcional con Ollama que propone categorías y no aplica nada sin confirmación.",
+    "platformsText": "Windows 10 y 11, y Linux (.deb, .rpm y AppImage). Versión 0.3.0.",
+    "linkRepository": "Repositorio en GitHub",
+    "linkReleases": "Versiones e instaladores",
+    "galleryNote": "Capturas del modo demostración de la aplicación, con datos ficticios.",
+    "captionHome": "Panel de inicio",
+    "captionMovements": "Movimientos",
+    "captionReports": "Informes",
+    "captionPdf": "Informe PDF Vintage",
+    "altHome": "Panel de inicio de Lunar Finance con gasto neto, ingresos, balance, evolución diaria y gasto por categoría",
+    "altMovements": "Lista de movimientos con filtros, categorías editables, método de pago e importes",
+    "altReports": "Vista previa del informe mensual con totales, gráfica y categorías",
+    "altPdf": "Primera página de un informe PDF en estilo Vintage"
+  },
+  "projectPsicoD": {
+    "eyebrow": "Sistema WordPress a medida · desarrollado para PsicoHito",
+    "summary": "De una página web encargada por una clienta a un sistema de gestión WordPress personalizado: un tema propio y un plugin de citas con los que el centro de psicología PsicoHito gestiona su web sin programar.",
+    "evolutionText": "El encargo era la web de un centro de psicología, y el plan inicial, montar sus páginas con un constructor visual. Como la clienta tenía que poder mantenerla sola, el constructor se sustituyó por un tema propio con paneles de edición por página, un sistema de paletas y un plugin para las solicitudes de cita.",
+    "themeLabel": "Tema a medida",
+    "themeText": "Paneles de edición para cada página y listas editables (preguntas, servicios, tarifas, profesionales, sedes…) con Subir, Bajar, Duplicar y Eliminar, y una casilla para mostrar u ocultar cada elemento. Registros centrales de servicios y tarifas. Sin constructor visual y sin jQuery.",
+    "visualLabel": "Identidad visual",
+    "visualText": "Cinco paletas de sistema (una oscura), hasta veinte paletas propias, colores de marca, radios, sombras y un acabado neumórfico opcional. Lo que elige la clienta se valida y llega a la web como variables CSS: nunca escribe CSS.",
+    "appointmentsLabel": "Citas",
+    "appointmentsText": "Plugin propio para el formulario de solicitud de cita, protegido con nonce, campo trampa y límite de envíos. Panel de citas con estados, confirmación, papelera y resumen en el escritorio de WordPress, adjunto de calendario (.ics) y newsletter.",
+    "responsiveLabel": "Responsive",
+    "responsiveText": "Diseño adaptable con menú móvil en acordeón. El menú de escritorio solo se activa con un puntero que permite hover, así que las tabletas táctiles usan el menú táctil.",
+    "linkSite": "psicohito.es (web publicada)",
+    "galleryNote": "Capturas de una instalación de pruebas con datos ficticios: no se muestran datos de pacientes ni de la clienta.",
+    "fictitiousStamp": "Instalación de pruebas · datos ficticios",
+    "captionMobile": "Web: menú móvil",
+    "captionPalettes": "Panel: paletas",
+    "captionServices": "Panel: servicios",
+    "captionAppointments": "Plugin: citas",
+    "altMobile": "Web en el móvil con el menú y el submenú de servicios desplegados",
+    "altPalettes": "Panel de identidad visual con las cinco paletas predefinidas",
+    "altServices": "Registro central de servicios con botones para subir, bajar, duplicar, plegar y eliminar",
+    "altAppointments": "Resumen de citas en el escritorio de WordPress, con datos ficticios"
   }
 }

@@ -227,6 +227,10 @@ export const PLATAFORMAS_ESCENARIO_4 = [
     }
 ];
 
+// velocidadMovimiento, fuerzaSalto y gravedad estan en unidades del mundo (pixeles de la imagen de
+// fondo de 1672x941) por segundo; Jugador.establecerEscalaFisica las pasa a pixeles de pantalla.
+// Altura maxima del salto = fuerzaSalto^2 / (2 * gravedad) = 185.7 unidades, igual en cualquier
+// resolucion. La subida obligatoria mas alta del mapa es de 166 (tests/fisica-salto.cjs lo comprueba).
 export const CONFIGURACION_JUGADOR = {
     posicionInicialX: 18,
     posicionInicialY: 76,
@@ -314,6 +318,35 @@ export const OBJETOS_ESCENARIO_3 = [
         mensajeInteraccionKey: "interactions.project",
         mensajeInteraccion: "Portfolio interactivo",
         panelId: "panel-proyecto-uno"
+    },
+    {
+        // En la planta superior derecha, entre la llegada de la escalera (x 548) y el portal.
+        id: "proyecto-lunar",
+        nombre: "Lunar Finance",
+        selector: "#objeto-proyecto-lunar",
+        plataformaId: "proyectos-plataforma-superior-derecha",
+        x: 712,
+        ancho: 116,
+        alto: 116,
+        distanciaInteraccion: 90,
+        teclaInteraccion: "KeyI",
+        mensajeInteraccionKey: "interactions.projectLunar",
+        mensajeInteraccion: "Lunar Finance",
+        panelId: "panel-proyecto-lunar"
+    },
+    {
+        id: "proyecto-psicod",
+        nombre: "Psico D",
+        selector: "#objeto-proyecto-psicod",
+        plataformaId: "proyectos-plataforma-superior-derecha",
+        x: 900,
+        ancho: 116,
+        alto: 116,
+        distanciaInteraccion: 90,
+        teclaInteraccion: "KeyI",
+        mensajeInteraccionKey: "interactions.projectPsicoD",
+        mensajeInteraccion: "Psico D",
+        panelId: "panel-proyecto-psicod"
     },
     {
         id: "portal-nivel",

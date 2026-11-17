@@ -84,6 +84,14 @@
                 <img class="objeto-proyecto-sprite" src="src/assets/imagenes/objetos/proyectos/normal.png" alt="">
             </div>
 
+            <div id="objeto-proyecto-lunar" class="objeto-interactivo objeto-proyecto oculto" data-objeto-proyecto="proyecto-lunar" aria-label="Proyecto Lunar Finance" data-i18n-aria-label="aria.projectObjectLunar">
+                <img class="objeto-proyecto-sprite" src="src/assets/imagenes/objetos/proyectos/normal.png" alt="">
+            </div>
+
+            <div id="objeto-proyecto-psicod" class="objeto-interactivo objeto-proyecto oculto" data-objeto-proyecto="proyecto-psicod" aria-label="Proyecto Psico D" data-i18n-aria-label="aria.projectObjectPsicoD">
+                <img class="objeto-proyecto-sprite" src="src/assets/imagenes/objetos/proyectos/normal.png" alt="">
+            </div>
+
             <div id="contacto-email" class="objeto-interactivo objeto-contacto oculto" aria-label="Abrir formulario de contacto" data-i18n-aria-label="aria.openContactForm"></div>
             <div id="contacto-github" class="objeto-interactivo objeto-contacto oculto" aria-label="Abrir GitHub" data-i18n-aria-label="aria.openGithub"></div>
             <div id="contacto-linkedin" class="objeto-interactivo objeto-contacto oculto" aria-label="Abrir LinkedIn" data-i18n-aria-label="aria.openLinkedin"></div>
@@ -250,6 +258,154 @@
                     <div>
                         <dt data-i18n="project.link">Enlace</dt>
                         <dd><a href="#" aria-label="Enlace pendiente del proyecto" data-i18n-aria-label="aria.pendingProjectLink" data-i18n="project.pendingLink">Pendiente de anadir</a></dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+    </section>
+
+    <section id="panel-proyecto-lunar" class="panel-flotante oculto" role="dialog" aria-modal="true" aria-labelledby="titulo-panel-proyecto-lunar">
+        <div class="panel-contenido panel-contenido-proyecto">
+            <button class="boton-cerrar" type="button" data-cerrar-panel aria-label="Cerrar panel" data-i18n-aria-label="aria.closePanel">X</button>
+            <span class="etiqueta-panel-proyecto" data-i18n="projectLunar.eyebrow">Aplicacion de escritorio</span>
+            <h1 id="titulo-panel-proyecto-lunar">Lunar Finance</h1>
+            <p class="resumen-panel-proyecto" data-i18n="projectLunar.summary">
+                Aplicacion de escritorio para gestionar las finanzas personales.
+            </p>
+            <div class="ficha-panel-proyecto">
+                <div class="fila-tecnologias-proyecto" aria-label="Tecnologias del proyecto" data-i18n-aria-label="aria.projectTechnologies">
+                    <span>Tauri 2</span>
+                    <span>Rust</span>
+                    <span>TypeScript</span>
+                    <span>React</span>
+                    <span>Vite</span>
+                    <span>Notion API</span>
+                    <span>Ollama</span>
+                </div>
+                <div class="galeria-panel-proyecto" role="list" aria-label="Capturas del proyecto" data-i18n-aria-label="aria.projectGallery">
+                    <figure class="captura-panel-proyecto" role="listitem">
+                        <a href="src/assets/imagenes/proyectos/lunar-finance/inicio.webp" target="_blank" rel="noopener noreferrer">
+                            <img src="src/assets/imagenes/proyectos/lunar-finance/inicio.webp" width="1280" height="800" loading="lazy" alt="Panel de inicio con gasto neto, ingresos, balance y gasto por categoria" data-i18n-alt="projectLunar.altHome">
+                        </a>
+                        <figcaption data-i18n="projectLunar.captionHome">Panel de inicio</figcaption>
+                    </figure>
+                    <figure class="captura-panel-proyecto" role="listitem">
+                        <a href="src/assets/imagenes/proyectos/lunar-finance/movimientos.webp" target="_blank" rel="noopener noreferrer">
+                            <img src="src/assets/imagenes/proyectos/lunar-finance/movimientos.webp" width="1280" height="800" loading="lazy" alt="Lista de movimientos con filtros y categorias editables" data-i18n-alt="projectLunar.altMovements">
+                        </a>
+                        <figcaption data-i18n="projectLunar.captionMovements">Movimientos</figcaption>
+                    </figure>
+                    <figure class="captura-panel-proyecto" role="listitem">
+                        <a href="src/assets/imagenes/proyectos/lunar-finance/informes.webp" target="_blank" rel="noopener noreferrer">
+                            <img src="src/assets/imagenes/proyectos/lunar-finance/informes.webp" width="1280" height="800" loading="lazy" alt="Vista previa del informe mensual con totales, grafica y categorias" data-i18n-alt="projectLunar.altReports">
+                        </a>
+                        <figcaption data-i18n="projectLunar.captionReports">Informes</figcaption>
+                    </figure>
+                    <figure class="captura-panel-proyecto" role="listitem">
+                        <a href="src/assets/imagenes/proyectos/lunar-finance/informe-pdf-vintage.webp" target="_blank" rel="noopener noreferrer">
+                            <img src="src/assets/imagenes/proyectos/lunar-finance/informe-pdf-vintage.webp" width="900" height="1273" loading="lazy" alt="Primera pagina de un informe PDF en estilo Vintage" data-i18n-alt="projectLunar.altPdf">
+                        </a>
+                        <figcaption data-i18n="projectLunar.captionPdf">Informe PDF Vintage</figcaption>
+                    </figure>
+                </div>
+                <p class="nota-galeria-proyecto" data-i18n="projectLunar.galleryNote">Capturas del modo demostracion, con datos ficticios.</p>
+                <dl class="lista-detalles-proyecto">
+                    <div>
+                        <dt data-i18n="project.problem">Problema principal</dt>
+                        <dd data-i18n="projectLunar.problemText">Apuntar gastos en Notion es cómodo, también desde el móvil, pero saber cuánto se ha gastado y en qué obliga a montar vistas, filtros y fórmulas para cada pregunta. Y un informe presentable no sale solo.</dd>
+                    </div>
+                    <div>
+                        <dt data-i18n="project.solution">Solucion</dt>
+                        <dd data-i18n="projectLunar.solutionText">Una aplicación ligera con Tauri 2: Rust se encarga de la API de Notion, del token (en el almacén seguro del sistema) y de la conexión con la IA local; TypeScript y React, de la interfaz, los cálculos y los informes. Sin servidor propio ni analíticas.</dd>
+                    </div>
+                    <div>
+                        <dt data-i18n="project.features">Funcionalidades</dt>
+                        <dd data-i18n="projectLunar.featuresText">Ingresos, gastos y balance por periodos · categorías con reglas de clasificación automática · pagos periódicos sin duplicados · informes PDF en estilo Clásico o Vintage y exportación a CSV · atajos de iPhone para apuntar gastos desde el móvil · IA local opcional con Ollama que propone categorías y no aplica nada sin confirmación.</dd>
+                    </div>
+                    <div>
+                        <dt data-i18n="project.platforms">Plataformas</dt>
+                        <dd data-i18n="projectLunar.platformsText">Windows 10 y 11, y Linux (.deb, .rpm y AppImage). Versión 0.3.0.</dd>
+                    </div>
+                    <div>
+                        <dt data-i18n="project.link">Enlace</dt>
+                        <dd>
+                            <a href="https://github.com/DiegoHA17/lunar-finance" target="_blank" rel="noopener noreferrer" data-i18n="projectLunar.linkRepository">Repositorio en GitHub</a>
+                            <span aria-hidden="true"> · </span>
+                            <a href="https://github.com/DiegoHA17/lunar-finance/releases" target="_blank" rel="noopener noreferrer" data-i18n="projectLunar.linkReleases">Versiones e instaladores</a>
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+    </section>
+
+    <section id="panel-proyecto-psicod" class="panel-flotante oculto" role="dialog" aria-modal="true" aria-labelledby="titulo-panel-proyecto-psicod">
+        <div class="panel-contenido panel-contenido-proyecto">
+            <button class="boton-cerrar" type="button" data-cerrar-panel aria-label="Cerrar panel" data-i18n-aria-label="aria.closePanel">X</button>
+            <span class="etiqueta-panel-proyecto" data-i18n="projectPsicoD.eyebrow">Sistema WordPress a medida para PsicoHito</span>
+            <h1 id="titulo-panel-proyecto-psicod">Psico D</h1>
+            <p class="resumen-panel-proyecto" data-i18n="projectPsicoD.summary">
+                De una pagina web encargada por una clienta a un sistema de gestion WordPress personalizado.
+            </p>
+            <div class="ficha-panel-proyecto">
+                <div class="fila-tecnologias-proyecto" aria-label="Tecnologias del proyecto" data-i18n-aria-label="aria.projectTechnologies">
+                    <span>WordPress</span>
+                    <span>PHP 8</span>
+                    <span>JavaScript</span>
+                    <span>CSS</span>
+                </div>
+                <div class="galeria-panel-proyecto" role="list" aria-label="Capturas del proyecto" data-i18n-aria-label="aria.projectGallery">
+                    <figure class="captura-panel-proyecto" role="listitem">
+                        <a href="src/assets/imagenes/proyectos/psico-d/web-menu-movil.webp" target="_blank" rel="noopener noreferrer">
+                            <img src="src/assets/imagenes/proyectos/psico-d/web-menu-movil.webp" width="520" height="1125" loading="lazy" alt="Web en movil con el menu y el submenu de servicios desplegados" data-i18n-alt="projectPsicoD.altMobile">
+                        </a>
+                        <figcaption data-i18n="projectPsicoD.captionMobile">Web: menu movil</figcaption>
+                    </figure>
+                    <figure class="captura-panel-proyecto" role="listitem">
+                        <a href="src/assets/imagenes/proyectos/psico-d/paletas-predefinidas.webp" target="_blank" rel="noopener noreferrer">
+                            <img src="src/assets/imagenes/proyectos/psico-d/paletas-predefinidas.webp" width="1280" height="909" loading="lazy" alt="Panel de identidad visual con las cinco paletas predefinidas" data-i18n-alt="projectPsicoD.altPalettes">
+                        </a>
+                        <figcaption data-i18n="projectPsicoD.captionPalettes">Panel: paletas</figcaption>
+                    </figure>
+                    <figure class="captura-panel-proyecto" role="listitem">
+                        <a href="src/assets/imagenes/proyectos/psico-d/registro-servicios.webp" target="_blank" rel="noopener noreferrer">
+                            <img src="src/assets/imagenes/proyectos/psico-d/registro-servicios.webp" width="1280" height="909" loading="lazy" alt="Registro central de servicios con botones para subir, bajar, duplicar y eliminar" data-i18n-alt="projectPsicoD.altServices">
+                        </a>
+                        <figcaption data-i18n="projectPsicoD.captionServices">Panel: servicios</figcaption>
+                    </figure>
+                    <figure class="captura-panel-proyecto" role="listitem">
+                        <a href="src/assets/imagenes/proyectos/psico-d/resumen-citas.webp" target="_blank" rel="noopener noreferrer">
+                            <img src="src/assets/imagenes/proyectos/psico-d/resumen-citas.webp" width="908" height="686" loading="lazy" alt="Widget de resumen de citas en el escritorio de WordPress, con datos ficticios" data-i18n-alt="projectPsicoD.altAppointments">
+                        </a>
+                        <span class="sello-captura-proyecto" data-i18n="projectPsicoD.fictitiousStamp">Instalacion de pruebas · datos ficticios</span>
+                        <figcaption data-i18n="projectPsicoD.captionAppointments">Plugin: citas</figcaption>
+                    </figure>
+                </div>
+                <p class="nota-galeria-proyecto" data-i18n="projectPsicoD.galleryNote">Capturas de una instalacion de pruebas con datos ficticios.</p>
+                <dl class="lista-detalles-proyecto">
+                    <div>
+                        <dt data-i18n="project.evolution">Evolucion</dt>
+                        <dd data-i18n="projectPsicoD.evolutionText">El encargo era la web de un centro de psicología, y el plan inicial, montar sus páginas con un constructor visual. Como la clienta tenía que poder mantenerla sola, el constructor se sustituyó por un tema propio con paneles de edición por página, un sistema de paletas y un plugin para las solicitudes de cita.</dd>
+                    </div>
+                    <div>
+                        <dt data-i18n="projectPsicoD.themeLabel">Tema a medida</dt>
+                        <dd data-i18n="projectPsicoD.themeText">Paneles de edición para cada página y listas editables (preguntas, servicios, tarifas, profesionales, sedes…) con Subir, Bajar, Duplicar y Eliminar, y una casilla para mostrar u ocultar cada elemento. Registros centrales de servicios y tarifas. Sin constructor visual y sin jQuery.</dd>
+                    </div>
+                    <div>
+                        <dt data-i18n="projectPsicoD.visualLabel">Identidad visual</dt>
+                        <dd data-i18n="projectPsicoD.visualText">Cinco paletas de sistema (una oscura), hasta veinte paletas propias, colores de marca, radios, sombras y un acabado neumórfico opcional. Lo que elige la clienta se valida y llega a la web como variables CSS: nunca escribe CSS.</dd>
+                    </div>
+                    <div>
+                        <dt data-i18n="projectPsicoD.appointmentsLabel">Citas</dt>
+                        <dd data-i18n="projectPsicoD.appointmentsText">Plugin propio para el formulario de solicitud de cita, protegido con nonce, campo trampa y límite de envíos. Panel de citas con estados, confirmación, papelera y resumen en el escritorio de WordPress, adjunto de calendario (.ics) y newsletter.</dd>
+                    </div>
+                    <div>
+                        <dt data-i18n="projectPsicoD.responsiveLabel">Responsive</dt>
+                        <dd data-i18n="projectPsicoD.responsiveText">Diseño adaptable con menú móvil en acordeón. El menú de escritorio solo se activa con un puntero que permite hover, así que las tabletas táctiles usan el menú táctil.</dd>
+                    </div>
+                    <div>
+                        <dt data-i18n="project.link">Enlace</dt>
+                        <dd><a href="https://psicohito.es/" target="_blank" rel="noopener noreferrer" data-i18n="projectPsicoD.linkSite">psicohito.es (web publicada)</a></dd>
                     </div>
                 </dl>
             </div>

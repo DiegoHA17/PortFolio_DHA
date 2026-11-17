@@ -509,6 +509,94 @@
         0 0 16px rgba(199, 86, 255, 0.52);
 }
 
+/* Paneles de proyecto con galeria: si no caben en la ventana, se desplazan por dentro. */
+.panel-contenido-proyecto {
+    max-height: calc(100dvh - 48px);
+    overflow-y: auto;
+    scrollbar-color: #c756ff rgba(255, 255, 255, 0.08);
+    scrollbar-width: thin;
+}
+
+/* Galeria opcional de capturas dentro de la ficha del proyecto: tira horizontal con scroll-snap. */
+.galeria-panel-proyecto {
+    display: flex;
+    gap: 12px;
+    margin: 0 0 8px;
+    padding: 2px 2px 10px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-color: #c756ff rgba(255, 255, 255, 0.08);
+    scrollbar-width: thin;
+}
+
+.captura-panel-proyecto {
+    position: relative;
+    flex: 0 0 auto;
+    margin: 0;
+    scroll-snap-align: start;
+}
+
+.captura-panel-proyecto a {
+    display: block;
+    border: 2px solid rgba(199, 86, 255, 0.55);
+    box-shadow:
+        0 3px 0 #000000,
+        0 0 0 1px rgba(0, 0, 0, 0.8) inset;
+    transition:
+        border-color 140ms ease,
+        box-shadow 140ms ease;
+}
+
+.captura-panel-proyecto a:hover,
+.captura-panel-proyecto a:focus-visible {
+    border-color: #ff6b9a;
+    outline: none;
+    box-shadow:
+        0 3px 0 #000000,
+        0 0 14px rgba(199, 86, 255, 0.55);
+}
+
+.captura-panel-proyecto img {
+    display: block;
+    width: auto;
+    height: 168px;
+    max-width: none;
+    background: #0b0a14;
+}
+
+.captura-panel-proyecto figcaption {
+    margin-top: 6px;
+    color: #f0b7ff;
+    font-size: 0.7rem;
+}
+
+.sello-captura-proyecto {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    padding: 3px 6px;
+    color: #160c18;
+    background: #ffd36b;
+    border: 2px solid #160c18;
+    box-shadow: 0 2px 0 #000000;
+    font-size: 0.6rem;
+    font-weight: 700;
+    pointer-events: none;
+}
+
+.nota-galeria-proyecto {
+    margin: 0 0 14px !important;
+    color: #caa7ff !important;
+    font-size: 0.7rem !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .captura-panel-proyecto a {
+        transition: none;
+    }
+}
+
 .boton-cerrar {
     position: absolute;
     top: 12px;
@@ -735,6 +823,23 @@
     .fila-tecnologias-proyecto {
         gap: 6px;
         margin-bottom: 10px;
+    }
+
+    .captura-panel-proyecto img {
+        height: 112px;
+    }
+
+    .captura-panel-proyecto figcaption,
+    .nota-galeria-proyecto {
+        font-size: 0.56rem !important;
+    }
+
+    .sello-captura-proyecto {
+        top: 4px;
+        left: 4px;
+        padding: 2px 4px;
+        border-width: 1px;
+        font-size: 0.46rem;
     }
 
     .fila-tecnologias-proyecto span {

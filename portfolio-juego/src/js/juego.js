@@ -43,6 +43,7 @@ export class Juego {
         this.estaCambiandoNivel = false;
         this.estaNavegandoDesdeCabecera = false;
         this.estaTransicionandoEscalera = false;
+        this.rectanguloMundoAnterior = null;
         this.spritePortalNivel = document.querySelector("#portal-nivel-sprite");
         this.framePortalNivel = 0;
         this.tiempoUltimoFramePortalNivel = 0;
@@ -650,13 +651,21 @@ export class Juego {
         }
 
         if (pulsaSalto) {
-            this.jugador.estaEnEscalera = false;
-            this.jugador.estaEnElSuelo = true;
-            this.jugador.saltar();
+            // Solo se salta desde la escalera si el jugador esta agarrado a ella. Antes, mantener
+            // abajo + salto en el aire dentro de la zona reiniciaba el salto en cada fotograma
+            // (salto infinito hasta salir por arriba).
+            if (this.jugador.estaEnEscalera) {
+                this.jugador.estaEnEscalera = false;
+                this.jugador.estaEnElSuelo = true;
+                this.jugador.saltar();
+            }
+
             return false;
         }
 
-        const velocidadEscalera = (escaleraActiva.velocidad ?? CONFIGURACION_JUGADOR.velocidadMovimiento) * deltaTime;
+        const velocidadEscalera = (escaleraActiva.velocidad ?? CONFIGURACION_JUGADOR.velocidadMovimiento)
+            * this.jugador.escalaFisica
+            * deltaTime;
         let desplazamientoVertical = 0;
 
         if (pulsaAbajo) {
@@ -735,6 +744,7 @@ export class Juego {
             this.jugador.estaEnEscalera = false;
             this.jugador.bloquearMovimiento();
             await this.jugador.desaparecer();
+            this.sincronizarGeometriaMundo();
 
             const rectanguloPlataforma = plataformaDestino.obtenerRectanguloPantalla();
             const rectanguloImagen = this.calcularRectanguloImagenFondo();
@@ -1431,7 +1441,62 @@ export class Juego {
         }
 
         const rectanguloImagen = this.calcularRectanguloImagenFondo();
+        this.sincronizarJugadorConEscalaMundo(rectanguloImagen);
         this.nivelActual.plataformasColision.forEach((plataforma) => plataforma.renderizar(rectanguloImagen));
+    }
+
+    /**
+     * El jugador guarda su posicion en pixeles de pantalla, pero el mundo se escala con el
+     * escenario. Si el escenario cambia de tamano (resize, rotacion o zoom del navegador), se
+     * reproyecta la posicion del jugador a las nuevas coordenadas para que siga sobre la misma
+     * plataforma, y se adapta la fisica a la nueva escala.
+     */
+    sincronizarJugadorConEscalaMundo(rectanguloImagen) {
+        // Escenario sin tamano (oculto o colapsado): no hay escala valida que guardar ni aplicar.
+        if (!this.jugador || !Number.isFinite(rectanguloImagen.escala) || rectanguloImagen.escala <= 0) {
+            return;
+        }
+
+        const altoEscenario = this.escenario.clientHeight;
+        const anterior = this.rectanguloMundoAnterior;
+        const haCambiado = anterior && (
+            Math.abs(anterior.escala - rectanguloImagen.escala) > 1e-6 ||
+            Math.abs(anterior.left - rectanguloImagen.left) > 0.01 ||
+            Math.abs(anterior.top - rectanguloImagen.top) > 0.01 ||
+            Math.abs(anterior.altoEscenario - altoEscenario) > 0.01
+        );
+
+        if (haCambiado) {
+            // El centro anterior se calcula con el ancho que tenia el jugador entonces: el resize
+            // puede haber cambiado ya su tamano responsive y, si no, la X derivaria en cada cambio.
+            const centroX = this.jugador.posicionX + anterior.anchoJugador / 2;
+            const centroXMundo = (centroX - anterior.left) / anterior.escala;
+            const piesYMundo = (anterior.altoEscenario - this.jugador.posicionY - anterior.top) / anterior.escala;
+
+            this.jugador.posicionX = rectanguloImagen.left + centroXMundo * rectanguloImagen.escala - this.jugador.ancho / 2;
+            this.jugador.posicionY = altoEscenario - (rectanguloImagen.top + piesYMundo * rectanguloImagen.escala);
+            this.jugador.posicionSuelo = this.jugador.posicionY;
+            this.jugador.actualizarPosicion();
+        }
+
+        this.jugador.establecerEscalaFisica(rectanguloImagen.escala);
+        this.rectanguloMundoAnterior = {
+            escala: rectanguloImagen.escala,
+            left: rectanguloImagen.left,
+            top: rectanguloImagen.top,
+            altoEscenario,
+            anchoJugador: this.jugador.ancho
+        };
+    }
+
+    /**
+     * Antes de colocar al jugador tras una espera (teletransporte, escalera, cambio de nivel) se
+     * sincroniza la geometria: si la ventana cambio de tamano entre fotogramas, las plataformas y
+     * la escala deben corresponder al escenario actual.
+     */
+    sincronizarGeometriaMundo() {
+        this.actualizarPlataformasColision();
+        this.actualizarEscaleras();
     }
 
     actualizarEscaleras() {
@@ -1519,6 +1584,7 @@ export class Juego {
     }
 
     colocarJugadorEnPlataformaInicial() {
+        this.sincronizarGeometriaMundo();
         const idPlataformaInicial = this.configuracionNivelActual?.plataformaInicialJugador
             ?? CONFIGURACION_ESCENARIO.plataformaInicialJugador;
         const posicionInicialX = this.configuracionNivelActual?.posicionInicialX
@@ -1675,6 +1741,7 @@ export class Juego {
     }
 
     colocarJugadorEnPlataforma(plataformaDestino) {
+        this.sincronizarGeometriaMundo();
         const rectangulo = plataformaDestino.obtenerRectanguloPantalla();
         const margen = 12;
         const minimoX = Math.max(0, rectangulo.left + margen);
@@ -1700,6 +1767,7 @@ export class Juego {
             return;
         }
 
+        this.sincronizarGeometriaMundo();
         const margenLateral = 18;
         const posicionX = this.obtenerPosicionHorizontalSobreVacio(margenLateral);
         const posicionY = Math.max(220, this.escenario.clientHeight - this.jugador.alto - 90);
@@ -1707,7 +1775,7 @@ export class Juego {
         this.jugador.posicionX = posicionX;
         this.jugador.posicionY = posicionY;
         this.jugador.posicionSuelo = posicionY;
-        this.jugador.velocidadVertical = -40;
+        this.jugador.velocidadVertical = -40 * this.jugador.escalaFisica;
         this.jugador.estaEnElSuelo = false;
         this.jugador.estaSaltando = false;
         this.jugador.actualizarPosicion();

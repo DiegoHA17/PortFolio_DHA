@@ -66,7 +66,10 @@
     "jump": "Jump",
     "interactI": "Interact with I",
     "interactE": "Interact with E",
-    "characterAlt": "Pixel art character"
+    "characterAlt": "Pixel art character",
+    "projectObjectLunar": "Lunar Finance project",
+    "projectObjectPsicoD": "Psico D project",
+    "projectGallery": "Project screenshots"
   },
   "contact": {
     "terminal": "Contact terminal",
@@ -144,7 +147,10 @@
     "solution": "Solution",
     "solutionText": "Built with vanilla HTML, CSS and JavaScript, including a reusable level system, collisions, portals, interactive objects, forms and i18next with local JSON files.",
     "link": "Link",
-    "pendingLink": "Repository pending"
+    "pendingLink": "Repository pending",
+    "features": "Features",
+    "platforms": "Platforms",
+    "evolution": "Evolution"
   },
   "tutorial": {
     "title": "Controls",
@@ -163,12 +169,57 @@
     "github": "Press E to open GitHub",
     "linkedin": "Press E to open LinkedIn",
     "cv": "Press E to download the CV",
-    "goToLevel": "Press I to go to {{level}}"
+    "goToLevel": "Press I to go to {{level}}",
+    "projectLunar": "Lunar Finance",
+    "projectPsicoD": "Psico D · PsicoHito"
   },
   "thoughts": {
     "level1": "Hmm... a mirror.",
     "level2": "Oh! The portal.",
     "level3": "What are those floating things?",
     "level4": "So many antennas..."
+  },
+  "projectLunar": {
+    "eyebrow": "Desktop application",
+    "summary": "A desktop app for personal finance: it turns a Notion expense database into a dashboard with income, expenses, categories, reports and recurring payments.",
+    "problemText": "Logging expenses in Notion is convenient, even from a phone, but finding out how much you spent and on what means building views, filters and formulas for every question. And a presentable report does not make itself.",
+    "solutionText": "A lightweight Tauri 2 app: Rust handles the Notion API, the token (stored in the system's secure storage) and the connection to the local AI; TypeScript and React handle the interface, calculations and reports. No own server and no analytics.",
+    "featuresText": "Income, expenses and balance by period · categories with automatic classification rules · recurring payments without duplicates · PDF reports in Classic or Vintage style and CSV export · iPhone shortcuts to log expenses from the phone · optional local AI with Ollama that suggests categories and never applies anything without confirmation.",
+    "platformsText": "Windows 10 and 11, and Linux (.deb, .rpm and AppImage). Version 0.3.0.",
+    "linkRepository": "GitHub repository",
+    "linkReleases": "Releases and installers",
+    "galleryNote": "Screenshots of the app's demo mode, with fictitious data.",
+    "captionHome": "Home dashboard",
+    "captionMovements": "Transactions",
+    "captionReports": "Reports",
+    "captionPdf": "Vintage PDF report",
+    "altHome": "Lunar Finance home dashboard with net spending, income, balance, daily trend and spending by category",
+    "altMovements": "Transaction list with filters, editable categories, payment method and amounts",
+    "altReports": "Monthly report preview with totals, chart and categories",
+    "altPdf": "First page of a Vintage-style PDF report"
+  },
+  "projectPsicoD": {
+    "eyebrow": "Custom WordPress system · built for PsicoHito",
+    "summary": "From a website commissioned by a client to a custom WordPress management system: a bespoke theme and an appointments plugin that let the PsicoHito psychology centre run its website without coding.",
+    "evolutionText": "The brief was a website for a psychology centre, and the initial plan was to build its pages with a visual page builder. Since the client had to be able to maintain it on her own, the builder was replaced with a custom theme with per-page editing panels, a palette system and a plugin for appointment requests.",
+    "themeLabel": "Custom theme",
+    "themeText": "Editing panels for each page and editable lists (FAQs, services, prices, professionals, locations…) with Move up, Move down, Duplicate and Delete, plus a checkbox to show or hide each item. Central registries for services and prices. No page builder and no jQuery.",
+    "visualLabel": "Visual identity",
+    "visualText": "Five system palettes (one dark), up to twenty custom palettes, brand colours, radii, shadows and an optional neumorphic finish. The client's choices are validated and reach the site as CSS variables: she never writes CSS.",
+    "appointmentsLabel": "Appointments",
+    "appointmentsText": "Custom plugin for the appointment request form, protected with a nonce, a honeypot field and a submission limit. Appointments panel with statuses, confirmation, trash and a WordPress dashboard summary, calendar attachment (.ics) and newsletter.",
+    "responsiveLabel": "Responsive",
+    "responsiveText": "Responsive design with an accordion mobile menu. The desktop menu only activates with a pointer that supports hover, so touch tablets get the touch menu.",
+    "linkSite": "psicohito.es (live site)",
+    "galleryNote": "Screenshots from a test installation with fictitious data: no patient or client data is shown.",
+    "fictitiousStamp": "Test installation · fictitious data",
+    "captionMobile": "Site: mobile menu",
+    "captionPalettes": "Admin: palettes",
+    "captionServices": "Admin: services",
+    "captionAppointments": "Plugin: appointments",
+    "altMobile": "Mobile site with the menu and the services submenu open",
+    "altPalettes": "Visual identity panel with the five predefined palettes",
+    "altServices": "Central services registry with move up, move down, duplicate, collapse and delete buttons",
+    "altAppointments": "Appointments summary on the WordPress dashboard, with fictitious data"
   }
 }

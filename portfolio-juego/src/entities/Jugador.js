@@ -22,6 +22,10 @@ export class Jugador extends Entidad {
         this.elementoImagen = elementoImagen;
         this.velocidadHorizontal = 0;
         this.velocidadVertical = 0;
+        // La fisica se define en unidades del mundo (pixeles de la imagen de fondo original) y se
+        // convierte a pixeles de pantalla con la escala real del escenario. Asi el salto alcanza
+        // las mismas plataformas con cualquier resolucion o nivel de zoom.
+        this.escalaFisica = 1;
         this.velocidadMovimiento = CONFIGURACION_JUGADOR.velocidadMovimiento;
         this.fuerzaSalto = CONFIGURACION_JUGADOR.fuerzaSalto;
         this.gravedad = CONFIGURACION_JUGADOR.gravedad;
@@ -49,6 +53,29 @@ export class Jugador extends Entidad {
         this.elementoImagen.addEventListener("error", () => {
             console.warn(`No se pudo cargar la imagen del personaje: ${this.elementoImagen.src}`);
         });
+    }
+
+    /**
+     * Adapta la fisica a la escala actual del mundo (pixeles de pantalla por unidad del mundo).
+     * Si la escala cambia en mitad de un salto (resize o zoom), la velocidad en curso se
+     * reescala para que la trayectoria siga siendo la misma en coordenadas del mundo.
+     */
+    establecerEscalaFisica(escala) {
+        if (!Number.isFinite(escala) || escala <= 0) {
+            return;
+        }
+
+        const proporcion = escala / this.escalaFisica;
+
+        if (proporcion !== 1) {
+            this.velocidadVertical *= proporcion;
+            this.velocidadHorizontal *= proporcion;
+        }
+
+        this.escalaFisica = escala;
+        this.velocidadMovimiento = CONFIGURACION_JUGADOR.velocidadMovimiento * escala;
+        this.fuerzaSalto = CONFIGURACION_JUGADOR.fuerzaSalto * escala;
+        this.gravedad = CONFIGURACION_JUGADOR.gravedad * escala;
     }
 
     moverALaDerecha() {
@@ -86,20 +113,22 @@ export class Jugador extends Entidad {
     }
 
     actualizarSalto() {
-        if (this.velocidadVertical > 80 && !this.estaEnElSuelo) {
+        if (this.velocidadVertical > 80 * this.escalaFisica && !this.estaEnElSuelo) {
             this.cambiarEstado(ESTADOS_JUGADOR.saltando);
         }
     }
 
     actualizarCaida() {
-        if (this.velocidadVertical < -80 && !this.estaEnElSuelo) {
+        if (this.velocidadVertical < -80 * this.escalaFisica && !this.estaEnElSuelo) {
             this.cambiarEstado(ESTADOS_JUGADOR.cayendo);
         }
     }
 
     aplicarGravedad(deltaTime, plataformasColision, altoEscenario, posicionYAnterior) {
+        // Integracion exacta para aceleracion constante: la altura maxima del salto no depende
+        // de los fotogramas por segundo (con Euler simple perdia altura a pocos fps).
+        this.posicionY += this.velocidadVertical * deltaTime - 0.5 * this.gravedad * deltaTime * deltaTime;
         this.velocidadVertical -= this.gravedad * deltaTime;
-        this.posicionY += this.velocidadVertical * deltaTime;
 
         const plataformaAterrizaje = this.obtenerPlataformaDeAterrizaje(
             plataformasColision,
@@ -140,8 +169,10 @@ export class Jugador extends Entidad {
         this.posicionX += this.velocidadHorizontal * deltaTime;
         this.posicionX = Math.max(limiteIzquierdo, Math.min(this.posicionX, limiteDerecho));
 
-        const posicionYAnterior = this.posicionY;
+        // Primero se ajusta al soporte (puede corregir la Y) y despues se toma la posicion anterior,
+        // para que el aterrizaje compare contra la superficie ya ajustada.
         this.actualizarSoporteEnSuelo(plataformasColision, altoEscenario);
+        const posicionYAnterior = this.posicionY;
         this.aplicarGravedad(deltaTime, plataformasColision, altoEscenario, posicionYAnterior);
         this.actualizarSalto();
         this.actualizarCaida();
@@ -232,10 +263,11 @@ export class Jugador extends Entidad {
     actualizarAnimacionSalto() {
         const framesSalto = RUTAS_PERSONAJE.saltar;
         let indiceFrame = 1;
+        const umbralFrame = 120 * this.escalaFisica;
 
-        if (this.velocidadVertical > 120) {
+        if (this.velocidadVertical > umbralFrame) {
             indiceFrame = 0;
-        } else if (this.velocidadVertical < -120) {
+        } else if (this.velocidadVertical < -umbralFrame) {
             indiceFrame = 2;
         }
 
@@ -253,7 +285,13 @@ export class Jugador extends Entidad {
 
         if (!plataformaSoporte) {
             this.estaEnElSuelo = false;
+            return;
         }
+
+        // La tolerancia acepta pequenas diferencias (redondeos tras un resize o zoom); se ajusta
+        // la Y a la superficie para que la gravedad no la atraviese por un error de coma flotante.
+        this.posicionY = plataformaSoporte.obtenerPosicionSuperiorDesdeAbajo(altoEscenario);
+        this.posicionSuelo = this.posicionY;
     }
 
     obtenerPlataformaDeAterrizaje(plataformasColision, altoEscenario, posicionYAnterior) {
@@ -261,17 +299,28 @@ export class Jugador extends Entidad {
             return null;
         }
 
-        return plataformasColision.find((plataforma) => {
+        // Si en un mismo fotograma se cruzan varias superficies (caidas rapidas), se aterriza en
+        // la mas alta: es la primera que tocarian los pies y evita atravesar plataformas.
+        let plataformaMasAlta = null;
+        let posicionMasAlta = Number.NEGATIVE_INFINITY;
+
+        plataformasColision.forEach((plataforma) => {
             const posicionSuperior = plataforma.obtenerPosicionSuperiorDesdeAbajo(altoEscenario);
             const estabaEncima = posicionYAnterior >= posicionSuperior;
             const haCruzadoLaSuperficie = this.posicionY <= posicionSuperior;
 
-            return (
+            if (
                 estabaEncima &&
                 haCruzadoLaSuperficie &&
+                posicionSuperior > posicionMasAlta &&
                 this.seSolapaHorizontalmenteConPlataforma(plataforma)
-            );
-        }) ?? null;
+            ) {
+                plataformaMasAlta = plataforma;
+                posicionMasAlta = posicionSuperior;
+            }
+        });
+
+        return plataformaMasAlta;
     }
 
     obtenerPlataformaBajoLosPies(plataformasColision, altoEscenario) {

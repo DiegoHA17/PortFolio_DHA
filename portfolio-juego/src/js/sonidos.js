@@ -23,6 +23,8 @@ const EFECTOS = {
 // (por ejemplo el tutorial inicial) se queda en silencio, como ya ocurria antes.
 const SONIDOS_POR_PANEL = {
     "panel-proyecto-uno": { abrir: "carpetaAbrir", cerrar: "carpetaCerrar" },
+    "panel-proyecto-lunar": { abrir: "carpetaAbrir", cerrar: "carpetaCerrar" },
+    "panel-proyecto-psicod": { abrir: "carpetaAbrir", cerrar: "carpetaCerrar" },
     "panel-ordenador": { abrir: "espejoAbrir", cerrar: "espejoCerrar" },
     "panel-cambio-nivel": { abrir: "portalAbrir", cerrar: "portalCerrar" }
 };

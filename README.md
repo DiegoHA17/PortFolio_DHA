@@ -17,7 +17,7 @@ La navegación combina movimiento por niveles con paneles de información y una 
 
 - **Sobre mí** con habilidades y formación.
 - **Experiencia** en un bloque con desplazamiento.
-- **Proyectos** presentados en un panel propio.
+- **Proyectos** con una carpeta interactiva por proyecto (Portfolio, Lunar Finance y Psico D), cada una con su ficha, tecnologías, capturas y enlaces.
 - **Contacto** con formulario y enlaces.
 
 ### Ambientación e interfaz
@@ -98,6 +98,7 @@ portfolio-juego/
 │   └── lava-animada/
 ├── tests/
 │   ├── audio.cjs
+│   ├── fisica-salto.cjs
 │   └── fondos-animados.cjs
 └── tools/
     ├── generar-fondos-animados.cjs
@@ -110,5 +111,5 @@ portfolio-juego/
 - **`src/js/`** agrupa la lógica del juego y los módulos de controles, animación, sonido e idioma.
 - **`src/lang/`** contiene los textos en español e inglés.
 - **`experimentos/lava-animada/`** reúne una comparación visual, fotogramas y scripts relacionados con los recursos animados.
-- **`tests/`** contiene archivos de pruebas de audio y fondos animados.
+- **`tests/`** contiene las pruebas de audio, de fondos animados y de la física del salto (`fisica-salto.cjs` comprueba que el salto alcanza las mismas plataformas en cualquier resolución, zoom o móvil en horizontal).
 - **`tools/`** contiene herramientas para generar fondos animados y preparar audio.
