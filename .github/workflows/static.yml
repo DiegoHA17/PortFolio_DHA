@@ -16,11 +16,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Obtener repositorio
@@ -38,6 +35,16 @@ jobs:
         with:
           path: './portfolio-juego'
 
+  # Job separado: evita que deploy-pages busque el artefacto justo después de
+  # subirlo en el mismo job (actions/deploy-pages#451).
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
       - name: Publicar portfolio
         id: deployment
         uses: actions/deploy-pages@v4
