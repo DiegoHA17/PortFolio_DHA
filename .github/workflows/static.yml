@@ -29,6 +29,10 @@ jobs:
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5
 
+      # Verificación de Google Search Console: no eliminar este archivo.
+      - name: Comprobar archivo de verificación de Google
+        run: test -f ./portfolio-juego/google7035aafe5ab9ec5e.html
+
       - name: Preparar portfolio
         uses: actions/upload-pages-artifact@v4
         with:
